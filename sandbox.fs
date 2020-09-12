@@ -50,4 +50,22 @@ TOKENS{
 S" Bar" FIND-TOKEN .S .TOKEN
 S" Zip" FIND-TOKEN .S 
 
+: SIZE ( n -- size )
+    1 BEGIN
+        SWAP 10 / DUP WHILE
+        SWAP 1+
+    REPEAT DROP ;
+
+: .COLOR ( code -- )
+    ESC[ ." 38;5;" DUP SIZE .R ." m" ;
+
+: DISPLAY-COLORS
+    256 0 DO
+        I DUP 16 MOD 0= IF CR THEN
+        DUP .COLOR 
+        DUP 3 .R 
+        ." ### $
+    LOOP ;
+
+DISPLAY-COLORS
 BYE
