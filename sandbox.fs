@@ -1,54 +1,70 @@
 VARIABLE TOKENS
+2VARIABLE TARGET
 
-: TOKENS{
-    HERE 0 , ;
+: TOKENS{ 0 ;
 
 : TOKEN, \ <cccccc>bl ( link c-info -- link' )
-    HERE >R
+    HERE -ROT
     SWAP , C,
-    BL WORD COUNT S,
-    R> ;
+    BL WORD COUNT S, ;
 
 : }TOKENS
     TOKENS ! ;
 
+: TOKEN>CATEGORY ( addr -- c )
+    CELL+ C@ ;
+
+: TOKEN>ID ( addr -- addr )
+    CELL+ 1+ ;
+
+: TOKEN>NEXT ( addr -- addr )
+    @ ;
+
+: UPPER ( addr count -- )
+    OVER + SWAP DO
+        I C@ DUP
+        [CHAR] a [CHAR] z 1+ WITHIN
+        IF TOUPPER THEN
+        I C!
+    LOOP ;
+
 : FIND-TOKEN ( addr count -- 'token|0 )
-    2>R
-    TOKENS @
+    2DUP UPPER
+    TARGET 2!  TOKENS @
     BEGIN
-        DUP @ WHILE
-        DUP CELL+ 1+ COUNT 2R@ COMPARE 0= IF
-            2R> 2DROP EXIT
-        THEN
-        @
-    REPEAT 2R> 2DROP DROP 0 ;
+        DUP WHILE
+        DUP TOKEN>ID COUNT
+        TARGET 2@ COMPARE
+        0= IF EXIT THEN
+        TOKEN>NEXT
+    REPEAT ;
 
 : .TOKEN ( 'token -- )
-    CELL+ DUP 
-    1+ COUNT TYPE SPACE 
+    CELL+ DUP
+    1+ COUNT TYPE SPACE
     [CHAR] : EMIT SPACE
     C@ . CR ;
 
 : .TOKENS
-    TOKENS @ 
+    TOKENS @
     BEGIN
         DUP @ WHILE
         DUP .TOKEN
         @
     REPEAT DROP ;
 
-unused 
-TOKENS{ 
-    48   TOKEN, Qux
-    42   TOKEN, Bar
-    17   TOKEN, Foo
-}TOKENS 
+unused
+TOKENS{
+    48   TOKEN, QUX
+    42   TOKEN, BAR
+    17   TOKEN, FOO
+}TOKENS
 
 ." used:" unused - . cr
 .TOKENS
 
-S" Bar" FIND-TOKEN .S .TOKEN
-S" Zip" FIND-TOKEN .S 
+S" bar" FIND-TOKEN .S .TOKEN
+S" Zip" FIND-TOKEN .S
 
 : SIZE ( n -- size )
     1 BEGIN
@@ -62,10 +78,35 @@ S" Zip" FIND-TOKEN .S
 : DISPLAY-COLORS
     256 0 DO
         I DUP 16 MOD 0= IF CR THEN
-        DUP .COLOR 
-        DUP 3 .R 
+        DUP .COLOR
+        DUP 3 .R
         ." ### $
     LOOP ;
 
-DISPLAY-COLORS
+: IS-TOKEN-CHAR? ( c -- ? )
+    33 128 WITHIN ;
+
+
+
+4 CONSTANT EOF
+
+
+: CAT 
+    0 0
+    BEGIN
+        KEY DUP EOF <> WHILE
+        DUP IS-TOKEN-CHAR? IF
+            SWAP 0= IF
+                ROT 1+ DUP .COLOR
+                -ROT
+            THEN
+            TRUE SWAP
+        ELSE
+            SWAP DROP FALSE SWAP
+        THEN
+        EMIT  
+    REPEAT ;
+
+CAT
 BYE
+
