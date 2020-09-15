@@ -61,9 +61,6 @@ ITEM-LIST NEW-WORDS
         KEY
     REPEAT ; 
 
-: IS-DEFINER? ( addr #  -- ? )
-    DEFINERS FIND-ITEM ;
-
 : NAME-COLOR
     ESC[ ." 36m" ;
     
@@ -73,36 +70,41 @@ ITEM-LIST NEW-WORDS
 : NEW-WORD-COLOR 
     ESC[ ." 34m" ;
 
+: DEFINING-COLOR
+    ESC[ ." 35m" ;
+
 : DEFINE ( addr # -- )
     NEW-WORDS ADD-ITEM ;
+
+: IS-DEFINER? ( addr # -- ? )
+    DEFINERS FIND-ITEM ;
 
 : IS-NEW-WORD? ( addr # -- ? )
     NEW-WORDS FIND-ITEM ;
     
 : PRETTY-PRINT
     BEGIN
-        GET-TOKEN >R
-        DUP ?DUP IF
-            DEFINING @ IF
-                TOKEN OVER DEFINE
-                DEFINING OFF
+        GET-TOKEN SWAP
+        DUP WHILE
+        DEFINING @ IF
+            TOKEN OVER DEFINE
+            DEFINING OFF
+            DEFINING-COLOR
+        ELSE
+            TOKEN OVER IS-NEW-WORD? IF
                 NEW-WORD-COLOR
             ELSE
-                TOKEN OVER IS-NEW-WORD? IF
-                    NEW-WORD-COLOR
+                TOKEN OVER FIND-NAME IF 
+                    NAME-COLOR 
+                    TOKEN OVER IS-DEFINER? DEFINING ! 
                 ELSE
-                    TOKEN OVER FIND-NAME IF 
-                        NAME-COLOR 
-                        TOKEN OVER IS-DEFINER? DEFINING ! 
-                    ELSE
-                        NUMBER-COLOR
-                    THEN
+                    NUMBER-COLOR
                 THEN
             THEN
-            TOKEN SWAP TYPE
         THEN
-        R> EMIT
-    0= UNTIL ;
+        TOKEN SWAP TYPE
+        EMIT
+    REPEAT ;
 
 PRETTY-PRINT BYE
 
