@@ -1,0 +1,29 @@
+
+[34mHEX
+ [34m: [31mHEX-DIGIT [34m( [32mn [32m-- [32mc [34m)
+     [34mDUP [32m0A [34m< [34mIF [34m[CHAR] [32m0 [34m+ [34mELSE [32m0A [34m- [34m[CHAR] [32mA [34m+ [34mTHEN
+[34m;
+ [34m: [31m.H2 [34m( [32mc [32m--
+[34m)     [34mDUP [32m000F0 [34mAND [32m4 [34mRSHIFT [32mHEX-DIGIT
+[34mEMIT     [32m000F [34mAND [32mHEX-DIGIT [34mEMIT
+[34m;
+ [34m: [31m.H4 [34m( [32mn [32m--
+[34m)     [34mDUP [32mFF000000 [34mAND [32m18 [34mRSHIFT
+[32m.H2     [34mDUP [32m00FF0000 [34mAND [32m10 [34mRSHIFT
+[32m.H2     [34mDUP [32m0000FF00 [34mAND [32m08 [34mRSHIFT
+[32m.H2         [32m000000FF [34mAND           [32m.H2
+[34m;
+
+ [34m:
+[31mHEXDUMP    
+[32m0     [34mBEGIN
+         [34mKEY [34mDUP [32m4 [34m<>
+[34mWHILE         [34mOVER [32m10 [34mMOD [34m0=
+[34mIF             [34mCR [34mOVER [32m.H4
+[34mSPACE        
+[34mTHEN         [32m.H2
+[34mSPACE        
+[34m1+     [34mREPEAT [34mDROP
+[34m;
+ [32mHEXDUMP
+[34mBYE

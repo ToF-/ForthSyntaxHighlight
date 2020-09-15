@@ -1,9 +1,12 @@
 VARIABLE DEFINING
 
+CREATE TOKEN 1024 ALLOT
+
 : ITEM-LIST \ cccccbl ( -- list )
     CREATE 0 , ;
 
-: ADD-ITEM ( list addr # -- )
+: ADD-ITEM ( addr # list -- )
+    -ROT
     2>R
     HERE OVER @ ,
     SWAP !
@@ -19,12 +22,12 @@ VARIABLE DEFINING
 
             
 ITEM-LIST DEFINERS
-DEFINERS S" :" ADD-ITEM 
-DEFINERS S" CREATE" ADD-ITEM
-DEFINERS S" VARIABLE" ADD-ITEM
-DEFINERS S" CONSTANT" ADD-ITEM
-DEFINERS S" 2VARIABLE" ADD-ITEM
-DEFINERS S" 2CONSTANT" ADD-ITEM
+S" :"         DEFINERS ADD-ITEM 
+S" CREATE"    DEFINERS ADD-ITEM
+S" VARIABLE"  DEFINERS ADD-ITEM
+S" CONSTANT"  DEFINERS ADD-ITEM
+S" 2VARIABLE" DEFINERS ADD-ITEM
+S" 2CONSTANT" DEFINERS ADD-ITEM
 
 ITEM-LIST NEW-WORDS
 
@@ -44,61 +47,61 @@ ITEM-LIST NEW-WORDS
 
 : SKIP-SPACE ( -- c )
     BEGIN
-        KEY? 0= IF EXIT THEN
-        KEY DUP IS-TOKEN-MATERIAL? 0= WHILE
+        KEY DUP 4 <> OVER IS-TOKEN-MATERIAL? 0= AND WHILE
         EMIT
     REPEAT ;
 
-: GET-TOKEN ( -- len )
+: GET-TOKEN ( -- len,c )
     0
     SKIP-SPACE
     BEGIN
-        KEY? 0= IF EXIT THEN
-        DUP IS-TOKEN-MATERIAL? WHILE
-        OVER PAD + C!
+        DUP 4 <> OVER IS-TOKEN-MATERIAL? AND WHILE
+        OVER TOKEN + C!
         1+
-        KEY? 0= IF EXIT THEN
         KEY
-    REPEAT EMIT ;
+    REPEAT ; 
 
 : IS-DEFINER? ( addr #  -- ? )
     DEFINERS FIND-ITEM ;
 
 : NAME-COLOR
-    ESC[ ." 34m" ;
+    ESC[ ." 36m" ;
     
 : NUMBER-COLOR
     ESC[ ." 32m" ;
 
 : NEW-WORD-COLOR 
-    ESC[ ." 31m" ;
+    ESC[ ." 34m" ;
 
+: DEFINE ( addr # -- )
+    NEW-WORDS ADD-ITEM ;
+
+: IS-NEW-WORD? ( addr # -- ? )
+    NEW-WORDS FIND-ITEM ;
+    
 : PRETTY-PRINT
     BEGIN
-        KEY? 0= IF EXIT THEN
-        GET-TOKEN
+        GET-TOKEN >R
         DUP ?DUP IF
             DEFINING @ IF
-                NEW-WORD-COLOR
+                TOKEN OVER DEFINE
                 DEFINING OFF
+                NEW-WORD-COLOR
             ELSE
-                PAD OVER NEW-WORDS FIND-ITEM IF
+                TOKEN OVER IS-NEW-WORD? IF
                     NEW-WORD-COLOR
                 ELSE
-                    PAD OVER FIND-NAME IF 
+                    TOKEN OVER FIND-NAME IF 
                         NAME-COLOR 
-                        PAD OVER DEFINERS FIND-ITEM IF
-                            DEFINING ON 
-                        ELSE
-                            DEFINING OFF
-                        THEN
+                        TOKEN OVER IS-DEFINER? DEFINING ! 
                     ELSE
                         NUMBER-COLOR
                     THEN
                 THEN
             THEN
-            PAD SWAP TYPE
+            TOKEN SWAP TYPE
         THEN
+        R> EMIT
     0= UNTIL ;
 
 PRETTY-PRINT BYE

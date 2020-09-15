@@ -1,6 +1,6 @@
 HEX
 
-: HEX-DIGIT ( n -- c )
+: HEX-DIGIT ( n -- c ) 
     DUP 0A < IF [CHAR] 0 + ELSE 0A - [CHAR] A + THEN ;
 
 : .H2 ( c -- )
