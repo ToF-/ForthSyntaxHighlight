@@ -1,5 +1,4 @@
 
-
 to start html code snippet with syntax highlighting:
 <pre style="color:#000020;background:#f6f8ff;">
 to output of a word:

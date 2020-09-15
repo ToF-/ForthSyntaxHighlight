@@ -1,3 +1,4 @@
+
 : IS-SPACE? ( c -- )
     DUP  32 =
     OVER 13 = OR
@@ -22,12 +23,21 @@
         KEY
     REPEAT DROP ;
 
-: .TOKENS 
+: NAME-COLOR
+    ESC[ ." 34m" ;
+    
+: NUMBER-COLOR
+    ESC[ ." 32m" ;
+
+: .TOKENS&NOT-TOKENS
     BEGIN
         KEY? 0= IF EXIT THEN
         GET-TOKEN
-        DUP ?DUP IF PAD OVER TYPE ."  ( length:" . ." )" CR THEN
+        DUP ?DUP IF 
+            PAD OVER FIND-NAME IF NAME-COLOR ELSE NUMBER-COLOR THEN
+            PAD SWAP TYPE CR
+        THEN
     0= UNTIL ;
 
-.TOKENS
+.TOKENS&NOT-TOKENS
 BYE
