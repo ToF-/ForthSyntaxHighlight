@@ -1,0 +1,28 @@
+HEX
+
+: HEX-DIGIT ( n -- c )
+    DUP 0A < IF [CHAR] 0 + ELSE 0A - [CHAR] A + THEN ;
+
+: .H2 ( c -- )
+    DUP 000F0 AND 4 RSHIFT HEX-DIGIT EMIT
+    000F AND HEX-DIGIT EMIT ;
+
+: .H4 ( n -- )
+    DUP FF000000 AND 18 RSHIFT .H2
+    DUP 00FF0000 AND 10 RSHIFT .H2
+    DUP 0000FF00 AND 08 RSHIFT .H2
+        000000FF AND           .H2 ;
+
+
+: HEXDUMP
+    0
+    BEGIN 
+        KEY DUP 4 <> WHILE
+        OVER 10 MOD 0= IF
+            CR OVER .H4 SPACE
+        THEN
+        .H2 SPACE
+        1+
+    REPEAT DROP ;
+
+HEXDUMP BYE

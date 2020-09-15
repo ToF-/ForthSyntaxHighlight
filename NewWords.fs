@@ -1,6 +1,6 @@
 VARIABLE DEFINING
 
-: LIST \ cccccbl ( -- list )
+: ITEM-LIST \ cccccbl ( -- list )
     CREATE 0 , ;
 
 : ADD-ITEM ( list addr # -- )
@@ -18,7 +18,7 @@ VARIABLE DEFINING
     REPEAT 2R> 2DROP ;
 
             
-LIST DEFINERS
+ITEM-LIST DEFINERS
 DEFINERS S" :" ADD-ITEM 
 DEFINERS S" CREATE" ADD-ITEM
 DEFINERS S" VARIABLE" ADD-ITEM
@@ -26,7 +26,7 @@ DEFINERS S" CONSTANT" ADD-ITEM
 DEFINERS S" 2VARIABLE" ADD-ITEM
 DEFINERS S" 2CONSTANT" ADD-ITEM
 
-LIST NEW-WORDS
+ITEM-LIST NEW-WORDS
 
 : .ITEMS ( addr -- )
     BEGIN
@@ -39,22 +39,25 @@ LIST NEW-WORDS
     OVER 13 = OR
     SWAP 10 = OR ;
 
-: SKIP-SPACE ( -- c )
-    BEGIN
-        KEY DUP IS-SPACE? WHILE
-        EMIT
-    REPEAT ;
-
 : IS-TOKEN-MATERIAL? ( c -- )
     33 256 WITHIN ;
+
+: SKIP-SPACE ( -- c )
+    BEGIN
+        KEY? 0= IF EXIT THEN
+        KEY DUP IS-TOKEN-MATERIAL? 0= WHILE
+        EMIT
+    REPEAT ;
 
 : GET-TOKEN ( -- len )
     0
     SKIP-SPACE
     BEGIN
+        KEY? 0= IF EXIT THEN
         DUP IS-TOKEN-MATERIAL? WHILE
         OVER PAD + C!
         1+
+        KEY? 0= IF EXIT THEN
         KEY
     REPEAT EMIT ;
 
@@ -68,35 +71,33 @@ LIST NEW-WORDS
     ESC[ ." 32m" ;
 
 : NEW-WORD-COLOR 
-    ESC[ ." 33m" ;
+    ESC[ ." 31m" ;
 
 : PRETTY-PRINT
     BEGIN
         KEY? 0= IF EXIT THEN
         GET-TOKEN
         DUP ?DUP IF
-            PAD OVER FIND-NAME IF 
-                NAME-COLOR 
-                PAD OVER DEFINERS FIND-ITEM IF
-                    DEFINING ON 
-                ELSE
-                    DEFINING OFF
-                THEN
+            DEFINING @ IF
+                NEW-WORD-COLOR
+                DEFINING OFF
             ELSE
-                DEFINING @ IF
-                    PAD OVER NEW-WORDS -ROT ADD-ITEM
+                PAD OVER NEW-WORDS FIND-ITEM IF
                     NEW-WORD-COLOR
-                    DEFINING OFF
                 ELSE
-                    PAD OVER NEW-WORDS FIND-ITEM IF
-                        NEW-WORD-COLOR 
+                    PAD OVER FIND-NAME IF 
+                        NAME-COLOR 
+                        PAD OVER DEFINERS FIND-ITEM IF
+                            DEFINING ON 
+                        ELSE
+                            DEFINING OFF
+                        THEN
                     ELSE
                         NUMBER-COLOR
-                        DEFINING OFF
                     THEN
                 THEN
             THEN
-            PAD SWAP TYPE 
+            PAD SWAP TYPE
         THEN
     0= UNTIL ;
 
