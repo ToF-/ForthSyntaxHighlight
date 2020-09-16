@@ -66,6 +66,9 @@ TOKENS{
 S" bar" FIND-TOKEN .S .TOKEN
 S" Zip" FIND-TOKEN .S
 
+: IS-TOKEN-CHAR? ( c -- ? )
+    33 128 WITHIN ;
+
 : SIZE ( n -- size )
     1 BEGIN
         SWAP 10 / DUP WHILE
@@ -82,9 +85,6 @@ S" Zip" FIND-TOKEN .S
         DUP 3 .R
         ." ### $
     LOOP ;
-
-: IS-TOKEN-CHAR? ( c -- ? )
-    33 128 WITHIN ;
 
 
 4 CONSTANT EOF
