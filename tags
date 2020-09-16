@@ -1,0 +1,79 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+%[	PrettyPrint.fs	/^: %[ ( -- addr # )$/;"	d
+.COLOR	sandbox.fs	/^: .COLOR ( code -- )$/;"	d
+.H2	HexDump.fs	/^: .H2 ( c -- )$/;"	d
+.H4	HexDump.fs	/^: .H4 ( n -- )$/;"	d
+.ITEMS	PrettyPrint.fs	/^: .ITEMS ( addr -- )$/;"	d
+.TOKEN	sandbox.fs	/^: .TOKEN ( 'token -- )$/;"	d
+.TOKENS	Tokens.fs	/^: .TOKENS $/;"	d
+.TOKENS	sandbox.fs	/^: .TOKENS$/;"	d
+.TOKENS&NOT-TOKENS	TokensAndNotTokens.fs	/^: .TOKENS&NOT-TOKENS$/;"	d
+0	PrettyPrint.fs	/^    CREATE 0 , ;$/;"	a
+2CONSTANT	categories.fs	/^syn keyword forthDefine CONSTANT 2CONSTANT FCONSTANT VARIABLE 2VARIABLE$/;"	c
+2VARIABLE	categories.fs	/^syn keyword forthDefine CONSTANT 2CONSTANT FCONSTANT VARIABLE 2VARIABLE$/;"	v
+ADDRESS-WORD-COLOR	PrettyPrint.fs	/^: ADDRESS-WORD-COLOR$/;"	d
+BUFFER:	categories.fs	/^syn keyword forthDefine NAME>STRING STATE C; CVARIABLE BUFFER: MARKER$/;"	v
+CAT	Cat.fs	/^: CAT$/;"	d
+CAT	sandbox.fs	/^: CAT $/;"	d
+CONTROL-COLOR	PrettyPrint.fs	/^: CONTROL-COLOR$/;"	d
+CREATE	categories.fs	/^syn keyword forthDefine FVARIABLE CREATE USER VALUE TO DEFER IS DOES> IMMEDIATE$/;"	v
+DEFINE	PrettyPrint.fs	/^: DEFINE ( addr # -- )$/;"	d
+DEFINING	PrettyPrint.fs	/^VARIABLE DEFINING$/;"	v
+DEFINING-COLOR	PrettyPrint.fs	/^: DEFINING-COLOR$/;"	d
+DISPLAY-COLORS	sandbox.fs	/^: DISPLAY-COLORS$/;"	d
+EOF	sandbox.fs	/^4 CONSTANT EOF$/;"	c
+FIND-ITEM	PrettyPrint.fs	/^: FIND-ITEM ( addr # list -- addr | 0 )$/;"	d
+FIND-TOKEN	sandbox.fs	/^: FIND-TOKEN ( addr count -- 'token|0 )$/;"	d
+GET-TOKEN	PrettyPrint.fs	/^: GET-TOKEN ( -- len,c )$/;"	d
+GET-TOKEN	Tokens.fs	/^: GET-TOKEN ( -- len )$/;"	d
+GET-TOKEN	TokensAndNotTokens.fs	/^: GET-TOKEN ( -- len )$/;"	d
+HEX-DIGIT	HexDump.fs	/^: HEX-DIGIT ( n -- c ) $/;"	d
+HEXDUMP	HexDump.fs	/^: HEXDUMP$/;"	d
+IN-STRING?	PrettyPrint.fs	/^VARIABLE IN-STRING?$/;"	v
+IS-DEFINER?	PrettyPrint.fs	/^: IS-DEFINER? ( addr # -- ? )$/;"	d
+IS-NEW-WORD?	PrettyPrint.fs	/^: IS-NEW-WORD? ( addr # -- ? )$/;"	d
+IS-SPACE?	PrettyPrint.fs	/^: IS-SPACE? ( c -- )$/;"	d
+IS-SPACE?	Tokens.fs	/^: IS-SPACE? ( c -- )$/;"	d
+IS-SPACE?	TokensAndNotTokens.fs	/^: IS-SPACE? ( c -- )$/;"	d
+IS-TOKEN-CHAR?	sandbox.fs	/^: IS-TOKEN-CHAR? ( c -- ? )$/;"	d
+IS-TOKEN-MATERIAL?	PrettyPrint.fs	/^: IS-TOKEN-MATERIAL? ( c -- )$/;"	d
+IS-TOKEN-MATERIAL?	Tokens.fs	/^: IS-TOKEN-MATERIAL? ( c -- )$/;"	d
+IS-TOKEN-MATERIAL?	TokensAndNotTokens.fs	/^: IS-TOKEN-MATERIAL? ( c -- )$/;"	d
+ITEM-LIST	PrettyPrint.fs	/^: ITEM-LIST \\ cccccbl ( -- list )$/;"	d
+NAME-COLOR	PrettyPrint.fs	/^: NAME-COLOR$/;"	d
+NAME-COLOR	TokensAndNotTokens.fs	/^: NAME-COLOR$/;"	d
+NEW-WORD-COLOR	PrettyPrint.fs	/^: NEW-WORD-COLOR$/;"	d
+NUMBER-COLOR	PrettyPrint.fs	/^: NUMBER-COLOR$/;"	d
+NUMBER-COLOR	TokensAndNotTokens.fs	/^: NUMBER-COLOR$/;"	d
+OPERATOR-COLOR	PrettyPrint.fs	/^: OPERATOR-COLOR $/;"	d
+PRETTY-PRINT	PrettyPrint.fs	/^: PRETTY-PRINT$/;"	d
+SIZE	sandbox.fs	/^: SIZE ( n -- size )$/;"	d
+SKIP-SPACE	PrettyPrint.fs	/^: SKIP-SPACE ( -- c )$/;"	d
+SKIP-SPACE	Tokens.fs	/^: SKIP-SPACE ( -- c )$/;"	d
+SKIP-SPACE	TokensAndNotTokens.fs	/^: SKIP-SPACE ( -- c )$/;"	d
+STACK-WORD-COLOR	PrettyPrint.fs	/^: STACK-WORD-COLOR$/;"	d
+STRING-COLOR	PrettyPrint.fs	/^: STRING-COLOR$/;"	d
+TARGET	sandbox.fs	/^2VARIABLE TARGET$/;"	v
+TIL-EOS	PrettyPrint.fs	/^: TIL-EOS ( -- c )$/;"	d
+TOKEN	PrettyPrint.fs	/^CREATE TOKEN 1024 ALLOT$/;"	a
+TOKEN,	sandbox.fs	/^: TOKEN, \\ <cccccc>bl ( link c-info -- link' )$/;"	d
+TOKEN>CATEGORY	sandbox.fs	/^: TOKEN>CATEGORY ( addr -- c )$/;"	d
+TOKEN>ID	sandbox.fs	/^: TOKEN>ID ( addr -- addr )$/;"	d
+TOKEN>NEXT	sandbox.fs	/^: TOKEN>NEXT ( addr -- addr )$/;"	d
+TOKENS	sandbox.fs	/^VARIABLE TOKENS$/;"	v
+TOKENS{	sandbox.fs	/^: TOKENS{ 0 ;$/;"	d
+UPPER	sandbox.fs	/^: UPPER ( addr count -- )$/;"	d
+USER	categories.fs	/^syn keyword forthDefine FVARIABLE CREATE USER VALUE TO DEFER IS DOES> IMMEDIATE$/;"	a
+],	PrettyPrint.fs	/^%[ 2VARIABLE ],$/;"	v
+],	PrettyPrint.fs	/^%[ CONSTANT ],$/;"	c
+],	PrettyPrint.fs	/^%[ CREATE ],$/;"	a
+],	PrettyPrint.fs	/^%[ VARIABLE ],$/;"	v
+],	PrettyPrint.fs	/^: ], ( list addr # -- list )$/;"	d
+].	PrettyPrint.fs	/^%[ 2CONSTANT ].$/;"	c
+].	PrettyPrint.fs	/^: ]. ( list -- )$/;"	d
+}TOKENS	sandbox.fs	/^: }TOKENS$/;"	d

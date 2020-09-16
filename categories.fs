@@ -18,54 +18,50 @@
 \ " Last Change: 2018-03-29
 \ " Filenames:   *.fs,*.ft
 \ " URL:	       https://github.com/jkotlinski/forth.vim
-
-syn keyword forthOperators + - * / MOD /MOD NEGATE ABS MIN MAX
-syn keyword forthOperators AND OR XOR NOT LSHIFT RSHIFT INVERT 2* 2/ 1+
-syn keyword forthOperators 1- 2+ 2- 8* UNDER+
-syn keyword forthOperators M+ */ */MOD M* UM* M*/ UM/MOD FM/MOD SM/REM
-syn keyword forthOperators D+ D- DNEGATE DABS DMIN DMAX D2* D2/
-syn keyword forthOperators F+ F- F* F/ FNEGATE FABS FMAX FMIN FLOOR FROUND
-syn keyword forthOperators F** FSQRT FEXP FEXPM1 FLN FLNP1 FLOG FALOG FSIN
-syn keyword forthOperators FCOS FSINCOS FTAN FASIN FACOS FATAN FATAN2 FSINH
-syn keyword forthOperators FCOSH FTANH FASINH FACOSH FATANH F2* F2/ 1/F
-syn keyword forthOperators F~REL F~ABS F~
-syn keyword forthOperators 0< 0<= 0<> 0= 0> 0>= < <= <> = > >= U< U<=
-syn keyword forthOperators U> U>= D0< D0<= D0<> D0= D0> D0>= D< D<= D<>
-syn keyword forthOperators D= D> D>= DU< DU<= DU> DU>= WITHIN ?NEGATE
-syn keyword forthOperators ?DNEGATE TRUE FALSE
+forthOperators
+ + - * / MOD /MOD NEGATE ABS MIN MAX
+ AND OR XOR NOT LSHIFT RSHIFT INVERT 2* 2/ 1+
+ 1- 2+ 2- 8* UNDER+
+ M+ */ */MOD M* UM* M*/ UM/MOD FM/MOD SM/REM
+ D+ D- DNEGATE DABS DMIN DMAX D2* D2/
+ F+ F- F* F/ FNEGATE FABS FMAX FMIN FLOOR FROUND
+ F** FSQRT FEXP FEXPM1 FLN FLNP1 FLOG FALOG FSIN
+ FCOS FSINCOS FTAN FASIN FACOS FATAN FATAN2 FSINH
+ FCOSH FTANH FASINH FACOSH FATANH F2* F2/ 1/F
+ F~REL F~ABS F~
+ 0< 0<= 0<> 0= 0> 0>= < <= <> = > >= U< U<=
+ U> U>= D0< D0<= D0<> D0= D0> D0>= D< D<= D<>
+ D= D> D>= DU< DU<= DU> DU>= WITHIN ?NEGATE
+ ?DNEGATE TRUE FALSE
 
 " various words that take an input and do something with it
 syn keyword forthFunction . U. .R U.R
 
 " stack manipulations
-syn keyword forthStack DROP NIP DUP OVER TUCK SWAP ROT -ROT ?DUP PICK ROLL
-syn keyword forthStack 2DROP 2NIP 2DUP 2OVER 2TUCK 2SWAP 2ROT 2-ROT
-syn keyword forthStack 3DUP 4DUP 5DUP 3DROP 4DROP 5DROP 8DROP 4SWAP 4ROT
-syn keyword forthStack 4-ROT 4TUCK 8SWAP 8DUP
-syn keyword forthRStack >R R> R@ RDROP 2>R 2R> 2R@ 2RDROP
-syn keyword forthRstack 4>R 4R> 4R@ 4RDROP
-syn keyword forthFStack FDROP FNIP FDUP FOVER FTUCK FSWAP FROT
-
-" stack pointer manipulations
-syn keyword forthSP SP@ SP! FP@ FP! RP@ RP! LP@ LP! DEPTH
+ DROP NIP DUP OVER TUCK SWAP ROT -ROT ?DUP PICK ROLL
+ 2DROP 2NIP 2DUP 2OVER 2TUCK 2SWAP 2ROT 2-ROT
+ 3DUP 4DUP 5DUP 3DROP 4DROP 5DROP 8DROP 4SWAP 4ROT
+ 4-ROT 4TUCK 8SWAP 8DUP
+ >R R> R@ RDROP 2>R 2R> 2R@ 2RDROP
+ 4>R 4R> 4R@ 4RDROP
+ FDROP FNIP FDUP FOVER FTUCK FSWAP FROT
+ SP@ SP! FP@ FP! RP@ RP! LP@ LP! DEPTH
 
 " address operations
-syn keyword forthMemory @ ! +! C@ C! 2@ 2! F@ F! SF@ SF! DF@ DF!
-syn keyword forthAdrArith CHARS CHAR+ CELLS CELL+ CELL ALIGN ALIGNED FLOATS
-syn keyword forthAdrArith FLOAT+ FLOAT FALIGN FALIGNED SFLOATS SFLOAT+
-syn keyword forthAdrArith SFALIGN SFALIGNED DFLOATS DFLOAT+ DFALIGN DFALIGNED
-syn keyword forthAdrArith MAXALIGN MAXALIGNED CFALIGN CFALIGNED
-syn keyword forthAdrArith ADDRESS-UNIT-BITS ALLOT ALLOCATE HERE
-syn keyword forthMemBlks MOVE ERASE CMOVE CMOVE> FILL BLANK UNUSED
+ @ ! +! C@ C! 2@ 2! F@ F! SF@ SF! DF@ DF!
+ CHARS CHAR+ CELLS CELL+ CELL ALIGN ALIGNED FLOATS
+ FLOAT+ FLOAT FALIGN FALIGNED SFLOATS SFLOAT+
+ SFALIGN SFALIGNED DFLOATS DFLOAT+ DFALIGN DFALIGNED
+ MAXALIGN MAXALIGNED CFALIGN CFALIGNED
+ ADDRESS-UNIT-BITS ALLOT ALLOCATE HERE
+ MOVE ERASE CMOVE CMOVE> FILL BLANK UNUSED
 
 " conditionals
-syn keyword forthCond IF ELSE ENDIF THEN CASE OF ENDOF ENDCASE ?DUP-IF
-syn keyword forthCond ?DUP-0=-IF AHEAD CS-PICK CS-ROLL CATCH THROW WITHIN
-
-" iterations
-syn keyword forthLoop BEGIN WHILE REPEAT UNTIL AGAIN
-syn keyword forthLoop ?DO LOOP I J K +DO U+DO -DO U-DO DO +LOOP -LOOP
-syn keyword forthLoop UNLOOP LEAVE ?LEAVE EXIT DONE FOR NEXT RECURSE
+ IF ELSE ENDIF THEN CASE OF ENDOF ENDCASE ?DUP-IF
+ ?DUP-0=-IF AHEAD CS-PICK CS-ROLL CATCH THROW WITHIN
+ BEGIN WHILE REPEAT UNTIL AGAIN
+ ?DO LOOP I J K +DO U+DO -DO U-DO DO +LOOP -LOOP
+ UNLOOP LEAVE ?LEAVE EXIT DONE FOR NEXT RECURSE
 
 " new words
 syn match forthClassDef '\<:class\s*[^ \t]\+\>'

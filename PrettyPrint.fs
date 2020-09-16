@@ -1,4 +1,5 @@
 VARIABLE DEFINING
+VARIABLE IN-STRING?
 
 CREATE TOKEN 1024 ALLOT
 
@@ -19,59 +20,76 @@ CREATE TOKEN 1024 ALLOT
 : ]. ( list -- )
     ], DROP ;
 
-ITEM-LIST DEFINERS
-DEFINERS
-S" :"         ],
-S" CREATE"    ],
-S" VARIABLE"  ],
-S" CONSTANT"  ],
-S" 2VARIABLE" ],
-S" 2CONSTANT" ].
-
-ITEM-LIST FORTH-OPERATORS
-FORTH-OPERATORS
-
-S" +" ], S" -" ], S" *" ], S" /" ], S" MOD" ], S" /MOD" ], S" NEGATE" ], S" ABS" ], S" MIN" ], S" MAX" ],
-S" AND" ], S" OR" ], S" XOR" ], S" NOT" ], S" LSHIFT" ], S" RSHIFT" ], S" INVERT" ], S" 2*" ], S" 2/" ], S" 1+" ],
-S" 1-" ], S" 2+" ], S" 2-" ], S" 8*" ], S" UNDER+" ],
-S" M+" ], S" */" ], S" */MOD" ], S" M*" ], S" UM*" ], S" M*/" ], S" UM/MOD" ], S" FM/MOD" ], S" SM/REM" ],
-S" D+" ], S" D-" ], S" DNEGATE" ], S" DABS" ], S" DMIN" ], S" DMAX" ], S" D2*" ], S" D2/" ],
-S" F+" ], S" F-" ], S" F*" ], S" F/" ], S" FNEGATE" ], S" FABS" ], S" FMAX" ], S" FMIN" ], S" FLOOR" ], S" FROUND" ],
-S" F**" ], S" FSQRT" ], S" FEXP" ], S" FEXPM1" ], S" FLN" ], S" FLNP1" ], S" FLOG" ], S" FALOG" ], S" FSIN" ],
-S" FCOS" ], S" FSINCOS" ], S" FTAN" ], S" FASIN" ], S" FACOS" ], S" FATAN" ], S" FATAN2" ], S" FSINH" ],
-S" FCOSH" ], S" FTANH" ], S" FASINH" ], S" FACOSH" ], S" FATANH" ], S" F2*" ], S" F2/" ], S" 1/F" ],
-S" F~REL" ], S" F~ABS" ], S" F~" ],
-S" 0<" ], S" 0<=" ], S" 0<>" ], S" 0=" ], S" 0>" ], S" 0>=" ], S" <" ], S" <=" ], S" <>" ], S" =" ], S" >" ], S" >=" ], S" U<" ], S" U<=" ],
-S" U>" ], S" U>=" ], S" D0<" ], S" D0<=" ], S" D0<>" ], S" D0=" ], S" D0>" ], S" D0>=" ], S" D<" ], S" D<=" ], S" D<>" ],
-S" D=" ], S" D>" ], S" D>=" ], S" DU<" ], S" DU<=" ], S" DU>" ], S" DU>=" ], S" WITHIN" ], S" ?NEGATE" ],
-S" ?DNEGATE" ], S" TRUE" ], S" FALSE" ].
-
-ITEM-LIST CONTROL-WORDS
-CONTROL-WORDS
-S" IF" ], S" ELSE" ], S" ENDIF" ], S" THEN" ], S" CASE" ], S" OF" ], S" ENDOF" ], S" ENDCASE" ], S" ?DUP-IF" ],
-S" ?DUP-0=-IF" ], S" AHEAD" ], S" CS-PICK" ], S" CS-ROLL" ], S" CATCH" ], S" THROW" ], S" WITHIN" ],
-S" BEGIN" ], S" WHILE" ], S" REPEAT" ], S" UNTIL" ], S" AGAIN" ],
-S" ?DO" ], S" LOOP" ], S" I" ], S" J" ], S" K" ], S" +DO" ], S" U+DO" ], S" -DO" ], S" U-DO" ], S" DO" ], S" +LOOP" ], S" -LOOP" ],
-S" UNLOOP" ], S" LEAVE" ], S" ?LEAVE" ], S" EXIT" ], S" DONE" ], S" FOR" ], S" NEXT" ], S" RECURSE" ].
-
-ITEM-LIST STACK-WORDS
-STACK-WORDS
-S" DROP" ], S" NIP" ], S" DUP" ], S" OVER" ], S" TUCK" ], S" SWAP" ], S" ROT" ], S" -ROT" ], S" ?DUP" ], S" PICK" ], S" ROLL" ],
-S" 2DROP" ], S" 2NIP" ], S" 2DUP" ], S" 2OVER" ], S" 2TUCK" ], S" 2SWAP" ], S" 2ROT" ], S" 2-ROT" ],
-S" 3DUP" ], S" 4DUP" ], S" 5DUP" ], S" 3DROP" ], S" 4DROP" ], S" 5DROP" ], S" 8DROP" ], S" 4SWAP" ], S" 4ROT" ],
-S" 4-ROT" ], S" 4TUCK" ], S" 8SWAP" ], S" 8DUP" ],
-S" >R" ], S" R>" ], S" R@" ], S" RDROP" ], S" 2>R" ], S" 2R>" ], S" 2R@" ], S" 2RDROP" ],
-S" 4>R" ], S" 4R>" ], S" 4R@" ], S" 4RDROP" ],
-S" FDROP" ], S" FNIP" ], S" FDUP" ], S" FOVER" ], S" FTUCK" ], S" FSWAP" ], S" FROT" ],
-S" SP@" ], S" SP!" ], S" FP@" ], S" FP!" ], S" RP@" ], S" RP!" ], S" LP@" ], S" LP!" ], S" DEPTH" ].
-
-ITEM-LIST NEW-WORDS
+: %[ ( -- addr # )
+    BL PARSE ;
 
 : .ITEMS ( addr -- )
     BEGIN
         @ DUP WHILE
         DUP CELL+ COUNT TYPE SPACE
     REPEAT DROP ;
+
+
+
+ITEM-LIST DEFINERS
+DEFINERS
+%[ : ],
+%[ CREATE ],
+%[ VARIABLE ],
+%[ CONSTANT ],
+%[ 2VARIABLE ],
+%[ 2CONSTANT ].
+
+ITEM-LIST FORTH-OPERATORS
+FORTH-OPERATORS
+%[ + ], %[ - ], %[ * ], %[ / ], %[ MOD ], %[ /MOD ], %[ NEGATE ], %[ AB[ ], %[ MIN ], %[ MAX ],
+%[ AND ], %[ OR ], %[ XOR ], %[ NOT ], %[ LSHIFT ], %[ RSHIFT ], %[ INVERT ], %[ 2* ], %[ 2/ ], %[ 1+ ],
+%[ 1- ], %[ 2+ ], %[ 2- ], %[ 8* ], %[ UNDER+ ],
+%[ M+ ], %[ */ ], %[ */MOD ], %[ M* ], %[ UM* ], %[ M*/ ], %[ UM/MOD ], %[ FM/MOD ], %[ SM/REM ],
+%[ D+ ], %[ D- ], %[ DNEGATE ], %[ DAB[ ], %[ DMIN ], %[ DMAX ], %[ D2* ], %[ D2/ ],
+%[ F+ ], %[ F- ], %[ F* ], %[ F/ ], %[ FNEGATE ], %[ FAB[ ], %[ FMAX ], %[ FMIN ], %[ FLOOR ], %[ FROUND ],
+%[ F** ], %[ FSQRT ], %[ FEXP ], %[ FEXPM1 ], %[ FLN ], %[ FLNP1 ], %[ FLOG ], %[ FALOG ], %[ FSIN ],
+%[ FCO[ ], %[ FSINCO[ ], %[ FTAN ], %[ FASIN ], %[ FACO[ ], %[ FATAN ], %[ FATAN2 ], %[ FSINH ],
+%[ FCOSH ], %[ FTANH ], %[ FASINH ], %[ FACOSH ], %[ FATANH ], %[ F2* ], %[ F2/ ], %[ 1/F ],
+%[ F~REL ], %[ F~AB[ ], %[ F~ ],
+%[ 0< ], %[ 0<= ], %[ 0<> ], %[ 0= ], %[ 0> ], %[ 0>= ], %[ < ], %[ <= ], %[ <> ], %[ = ], %[ > ], %[ >= ], %[ U< ], %[ U<= ],
+%[ U> ], %[ U>= ], %[ D0< ], %[ D0<= ], %[ D0<> ], %[ D0= ], %[ D0> ], %[ D0>= ], %[ D< ], %[ D<= ], %[ D<> ],
+%[ D= ], %[ D> ], %[ D>= ], %[ DU< ], %[ DU<= ], %[ DU> ], %[ DU>= ], %[ WITHIN ], %[ ?NEGATE ],
+%[ ?DNEGATE ], %[ TRUE ], %[ FALSE ], %[ . ], %[ U. ], %[ .R ], %[ U.R ].
+
+ITEM-LIST CONTROL-WORDS
+CONTROL-WORDS
+%[ IF ], %[ ELSE ], %[ ENDIF ], %[ THEN ], %[ CASE ], %[ OF ], %[ ENDOF ], %[ ENDCASE ], %[ ?DUP-IF ],
+%[ ?DUP-0=-IF ], %[ AHEAD ], %[ CS-PICK ], %[ CS-ROLL ], %[ CATCH ], %[ THROW ], %[ WITHIN ],
+%[ BEGIN ], %[ WHILE ], %[ REPEAT ], %[ UNTIL ], %[ AGAIN ],
+%[ ?DO ], %[ LOOP ], %[ I ], %[ J ], %[ K ], %[ +DO ], %[ U+DO ], %[ -DO ], %[ U-DO ], %[ DO ], %[ +LOOP ], %[ -LOOP ],
+%[ UNLOOP ], %[ LEAVE ], %[ ?LEAVE ], %[ EXIT ], %[ DONE ], %[ FOR ], %[ NEXT ], %[ RECURSE ].
+
+ITEM-LIST STACK-WORDS
+STACK-WORDS
+%[ DROP ], %[ NIP ], %[ DUP ], %[ OVER ], %[ TUCK ], %[ SWAP ], %[ ROT ], %[ -ROT ], %[ ?DUP ], %[ PICK ], %[ ROLL ],
+%[ 2DROP ], %[ 2NIP ], %[ 2DUP ], %[ 2OVER ], %[ 2TUCK ], %[ 2SWAP ], %[ 2ROT ], %[ 2-ROT ],
+%[ 3DUP ], %[ 4DUP ], %[ 5DUP ], %[ 3DROP ], %[ 4DROP ], %[ 5DROP ], %[ 8DROP ], %[ 4SWAP ], %[ 4ROT ],
+%[ 4-ROT ], %[ 4TUCK ], %[ 8SWAP ], %[ 8DUP ],
+%[ >R ], %[ R> ], %[ R@ ], %[ RDROP ], %[ 2>R ], %[ 2R> ], %[ 2R@ ], %[ 2RDROP ],
+%[ 4>R ], %[ 4R> ], %[ 4R@ ], %[ 4RDROP ],
+%[ FDROP ], %[ FNIP ], %[ FDUP ], %[ FOVER ], %[ FTUCK ], %[ FSWAP ], %[ FROT ],
+%[ SP@ ], %[ SP! ], %[ FP@ ], %[ FP! ], %[ RP@ ], %[ RP! ], %[ LP@ ], %[ LP! ], %[ DEPTH ].
+
+ITEM-LIST ADDRESS-WORDS
+ADDRESS-WORDS
+%[ @ ], %[ ! ], %[ +! ], %[ C@ ], %[ C! ], %[ 2@ ], %[ 2! ], %[ F@ ], %[ F! ], %[ SF@ ], %[ SF! ], %[ DF@ ], %[ DF! ],
+%[ CHARS ], %[ CHAR+ ], %[ CELLS ], %[ CELL+ ], %[ CELL ], %[ ALIGN ], %[ ALIGNED ], %[ FLOATS ],
+%[ FLOAT+ ], %[ FLOAT ], %[ FALIGN ], %[ FALIGNED ], %[ SFLOATS ], %[ SFLOAT+ ],
+%[ SFALIGN ], %[ SFALIGNED ], %[ DFLOATS ], %[ DFLOAT+ ], %[ DFALIGN ], %[ DFALIGNED ],
+%[ MAXALIGN ], %[ MAXALIGNED ], %[ CFALIGN ], %[ CFALIGNED ],
+%[ ADDRESS-UNIT-BITS ], %[ ALLOT ], %[ ALLOCATE ], %[ HERE ],
+%[ MOVE ], %[ ERASE ], %[ CMOVE ], %[ CMOVE> ], %[ FILL ], %[ BLANK ], %[ UNUSED ].
+
+ITEM-LIST STRING-WORDS
+STRING-WORDS %[ S" ], %[ ." ], %[ ABORT" ].
+
+ITEM-LIST NEW-WORDS
 
 : IS-SPACE? ( c -- )
     DUP  32 =
@@ -80,6 +98,12 @@ ITEM-LIST NEW-WORDS
 
 : IS-TOKEN-MATERIAL? ( c -- )
     33 256 WITHIN ;
+
+: TIL-EOS ( -- c )
+    BEGIN
+        KEY DUP 4 <> OVER [CHAR] " <> AND WHILE
+        EMIT
+    REPEAT ;
 
 : SKIP-SPACE ( -- c )
     BEGIN
@@ -103,6 +127,9 @@ ITEM-LIST NEW-WORDS
 : NUMBER-COLOR
     ESC[ ." 32m" ;
 
+: STRING-COLOR
+    ESC[ ." 32m" ;
+
 : NEW-WORD-COLOR
     ESC[ ." 34m" ;
 
@@ -118,6 +145,9 @@ ITEM-LIST NEW-WORDS
 : STACK-WORD-COLOR
     ESC[ ." 35m" ;
 
+: ADDRESS-WORD-COLOR
+    ESC[ ." 38m" ;
+
 : DEFINE ( addr # -- )
     NEW-WORDS -ROT ]. ;
 
@@ -128,7 +158,9 @@ ITEM-LIST NEW-WORDS
     NEW-WORDS FIND-ITEM ;
    
 : PRETTY-PRINT
+    IN-STRING? OFF
     BEGIN
+        IN-STRING? @ IF TIL-EOS THEN
         GET-TOKEN SWAP
         DUP WHILE
         DEFINING @ IF
@@ -141,10 +173,15 @@ ITEM-LIST NEW-WORDS
             ELSE
                 TOKEN OVER FIND-NAME IF
                     NAME-COLOR
+                    TOKEN OVER STRING-WORDS FIND-ITEM IF 
+                        IN-STRING? ON
+                        STRING-COLOR
+                    THEN
                     TOKEN OVER IS-DEFINER? DEFINING !
                     TOKEN OVER FORTH-OPERATORS FIND-ITEM IF OPERATOR-COLOR THEN
                     TOKEN OVER CONTROL-WORDS FIND-ITEM IF CONTROL-COLOR THEN
                     TOKEN OVER STACK-WORDS FIND-ITEM IF STACK-WORD-COLOR THEN
+                    TOKEN OVER ADDRESS-WORDS FIND-ITEM IF ADDRESS-WORD-COLOR THEN
                 ELSE
                     NUMBER-COLOR
                 THEN
@@ -154,6 +191,6 @@ ITEM-LIST NEW-WORDS
         EMIT
     REPEAT ;
 
-PRETTY-PRINT BYE
+." We are going to print a string so DUP and + are NOT colorized" PRETTY-PRINT BYE
 
 
