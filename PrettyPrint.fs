@@ -1,5 +1,7 @@
 VARIABLE DEFINING
 VARIABLE IN-STRING?
+VARIABLE IN-COMMENT?
+VARIABLE IN-LINE-COMMENT?
 
 CREATE TOKEN 1024 ALLOT
 
@@ -89,6 +91,9 @@ ADDRESS-WORDS
 ITEM-LIST STRING-WORDS
 STRING-WORDS %[ S" ], %[ ." ], %[ ABORT" ].
 
+ITEM-LIST COMMENT-WORDS
+COMMENT-WORDS S" (" ].
+
 ITEM-LIST NEW-WORDS
 
 : IS-SPACE? ( c -- )
@@ -99,11 +104,29 @@ ITEM-LIST NEW-WORDS
 : IS-TOKEN-MATERIAL? ( c -- )
     33 256 WITHIN ;
 
-: TIL-EOS ( -- c )
+: TIL-EOL ( -- )
     BEGIN
-        KEY DUP 4 <> OVER [CHAR] " <> AND WHILE
+        KEY DUP 4 <> OVER 13 <> AND OVER 10 <> AND WHILE
         EMIT
-    REPEAT ;
+    REPEAT 
+    DUP 4 <> IF EMIT ELSE DROP THEN 
+    IN-LINE-COMMENT? OFF ;
+
+: TIL-EOC ( -- )
+    BEGIN
+        KEY DUP 4 <> OVER [CHAR] ) <> AND OVER 13 <> AND OVER 10 <> AND WHILE
+        EMIT
+    REPEAT 
+    DUP 4 <> IF EMIT ELSE DROP THEN 
+    IN-COMMENT? OFF ;
+
+: TIL-EOS ( -- )
+    BEGIN
+        KEY DUP 4 <> OVER [CHAR] " <> AND OVER 13 <> AND OVER 10 <> AND WHILE
+        EMIT
+    REPEAT 
+    DUP 4 <> IF EMIT ELSE DROP THEN 
+    IN-STRING? OFF ;
 
 : SKIP-SPACE ( -- c )
     BEGIN
@@ -130,8 +153,11 @@ ITEM-LIST NEW-WORDS
 : STRING-COLOR
     ESC[ ." 32m" ;
 
+: COMMENT-COLOR
+    ESC[ ." 35m" ;
+
 : NEW-WORD-COLOR
-    ESC[ ." 34m" ;
+    ESC[ ." 37m" ;
 
 : DEFINING-COLOR
     ESC[ ." 37m" ;
@@ -143,7 +169,7 @@ ITEM-LIST NEW-WORDS
     ESC[ ." 33m" ;
 
 : STACK-WORD-COLOR
-    ESC[ ." 35m" ;
+    ESC[ ." 33m" ;
 
 : ADDRESS-WORD-COLOR
     ESC[ ." 38m" ;
@@ -159,8 +185,12 @@ ITEM-LIST NEW-WORDS
    
 : PRETTY-PRINT
     IN-STRING? OFF
+    IN-COMMENT? OFF
+    IN-LINE-COMMENT? OFF
     BEGIN
         IN-STRING? @ IF TIL-EOS THEN
+        IN-COMMENT? @ IF TIL-EOC THEN
+        IN-LINE-COMMENT? @ IF TIL-EOL THEN
         GET-TOKEN SWAP
         DUP WHILE
         DEFINING @ IF
@@ -177,6 +207,14 @@ ITEM-LIST NEW-WORDS
                         IN-STRING? ON
                         STRING-COLOR
                     THEN
+                    TOKEN OVER COMMENT-WORDS FIND-ITEM IF 
+                        IN-COMMENT? ON
+                        COMMENT-COLOR
+                    THEN
+                    TOKEN OVER S" \" COMPARE 0= IF
+                        IN-LINE-COMMENT? ON
+                        COMMENT-COLOR
+                    THEN \ this is a line comment
                     TOKEN OVER IS-DEFINER? DEFINING !
                     TOKEN OVER FORTH-OPERATORS FIND-ITEM IF OPERATOR-COLOR THEN
                     TOKEN OVER CONTROL-WORDS FIND-ITEM IF CONTROL-COLOR THEN
@@ -191,6 +229,6 @@ ITEM-LIST NEW-WORDS
         EMIT
     REPEAT ;
 
-." We are going to print a string so DUP and + are NOT colorized" PRETTY-PRINT BYE
+PRETTY-PRINT BYE
 
 
