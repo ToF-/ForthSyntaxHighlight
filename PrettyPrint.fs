@@ -1,8 +1,9 @@
-VARIABLE DEFINING
-VARIABLE IN-STRING?
-VARIABLE IN-COMMENT?
-VARIABLE IN-LINE-COMMENT?
+VARIABLE DEFINING           \ the next token will be a user defined word
+VARIABLE IN-STRING?         \ chars currently output are inside a string
+VARIABLE IN-COMMENT?        \ chars currently output are inside a comment
+VARIABLE IN-LINE-COMMENT?   \ chars currently output are part of a line comment
 
+\ categories of forth tokens
  0 CONSTANT NAME_
  1 CONSTANT NUMBER_
  2 CONSTANT STRING_
@@ -15,7 +16,7 @@ VARIABLE IN-LINE-COMMENT?
  9 CONSTANT STACK_
 10 CONSTANT ADDRESS_
 
-
+\ ANSI color codes associated with categories
 CREATE COLORS 
 33 C,  \ NAME
 32 C,  \ NUMBER
@@ -28,6 +29,50 @@ CREATE COLORS
 34 C,  \ CONTROL
 33 C,  \ STACK
 33 C,  \ ADDRESS
+
+\ Logical Color	Terminal Color	RGB Value Used by SGD
+\ Color_0	Black	0 0 0
+\ Color_1	Light red	255 0 0
+\ Color_2	Light green	0 255 0
+\ Color_3	Yellow	255 255 0
+\ Color_4	Light blue	0 0 255
+\ Color_5	Light magenta	255 0 255
+\ Color_6	Light cyan	0 255 255
+\ Color_7	High white	255 255 255
+\ Color_8	Gray	128 128 128
+\ Color_9	Red	128 0 0
+\ Color_10	Green	0 128 0
+\ Color_11	Brown	128 128 0
+\ Color_12	Blue	0 0 128
+\ Color_13	Magenta	128 0 128
+\ Color_14	Cyan	0 128 128
+\ Color_15	White	192 192 192
+
+\ RGB color codes associated with categories
+CREATE RGBCOLORS
+HEX
+800000 ,  \ NAME
+008000 ,  \ NUMBER
+008000 ,  \ STRING
+800080 ,  \ COMMENT
+800080 ,  \ LINE-COMMENT
+008080 ,  \ NEW WORD
+c0c0c0 ,  \ DEFINING WORD
+000080 ,  \ OPERATOR
+000080 ,  \ CONTROL
+808000 ,  \ STACK
+808000 ,  \ ADDRESS
+
+: .HEX-BYTE ( c -- )
+    DUP 000F0 AND 4 RSHIFT HEX-DIGIT EMIT
+    000F AND HEX-DIGIT EMIT ;
+
+: .RGB-HEX ( n -- )
+    [CHAR] # EMIT
+    DUP FF0000 AND 10 RSHIFT .HEX-BYTE
+    DUP 00FF00 AND 08 RSHIFT .HEX-BYTE
+        0000FF AND           .HEX-BYTE ;
+DECIMAL
 
 CREATE TOKEN 1024 ALLOT
 
