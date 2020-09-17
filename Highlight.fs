@@ -36,6 +36,32 @@ CREATE TOKEN 1024 ALLOT
         DUP 4 <> 
         OVER IS-SPACE? 0= AND WHILE
         OVER TOKEN + C!
-        1+
-        _KEY
+        1+ _KEY
     REPEAT ;
+
+: ?EMIT ( c -- )
+    DUP 4 <> IF _EMIT ELSE DROP THEN ;
+
+: .SKIP-LINE
+    BEGIN
+        _KEY DUP   4 <>
+             OVER 10 <> AND
+             OVER 13 <> AND WHILE
+        _EMIT
+    REPEAT ?EMIT ;
+
+: .SKIP-COMMENT
+    BEGIN
+        _KEY DUP   4 <>
+             OVER [CHAR] ) <> AND WHILE
+        _EMIT
+    REPEAT ?EMIT ;
+
+: .SKIP-STRING
+    BEGIN
+        _KEY DUP   4 <>
+             OVER [CHAR] " <> AND WHILE
+        _EMIT
+    REPEAT ?EMIT ;
+
+
