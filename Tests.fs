@@ -34,7 +34,7 @@ VARIABLE _#INPUT
 : ?OUTPUT ( addr # -- ? )
     _OUTPUT _OUTPUT# @
     COMPARE 0 ?S ;
-   
+  
 ' EMIT>! IS _EMIT
 ' TYPE>! IS _TYPE
 ' KEY<@ IS _KEY
@@ -133,17 +133,26 @@ T{ ." a LINKED-LIST starts with 0 as the first link " CR
     FOO @ 0 ?S
 }T
 
-T{ ." L, adds an item to a new linked list links to 0 " CR
-    FOO S" Bar" 4807 L,
+T{ ." LINK, adds an item to a new linked list links to 0 " CR
+    FOO S" Bar" 4807 LINK,
     FOO @ LINK>VALUE 4807 ?S
     FOO @ LINK>NAME COUNT S" Bar" COMPARE 0 ?S
     FOO @ LINK>LINK 0 ?S
 }T
 
 T{ ." FIND-LINK finds an item or returns 0 " CR
-    FOO S" Qux" 42 L,
+    FOO S" Qux" 42 LINK,
     FOO S" Bar" FIND-LINK LINK>VALUE 4807 ?S
     FOO S" Qux" FIND-LINK LINK>VALUE 42 ?S
     FOO S" Baz" FIND-LINK 0 ?S
 }T
+
+T{ ." TOKENS include all forth standard words with their category " CR
+    TOKENS S" SWAP" FIND-LINK LINK>VALUE STACK-CATEGORY ?S
+    TOKENS S" /MOD" FIND-LINK LINK>VALUE OPERATOR-CATEGORY ?S
+    TOKENS S" UNUSED" FIND-LINK LINK>VALUE ADDRESS-CATEGORY ?S
+    TOKENS S" CREATE" FIND-LINK LINK>VALUE DEFINING-CATEGORY ?S
+    TOKENS S" ENDIF" FIND-LINK LINK>VALUE CONTROL-CATEGORY ?S
+}T
 BYE
+
