@@ -25,7 +25,7 @@ CREATE TOKEN 1024 ALLOT
 
 : .SKIP-SPACE ( -- c )
     BEGIN
-        _KEY DUP 4 <> 
+        _KEY DUP 4 <>
         OVER IS-SPACE? AND WHILE
         _EMIT
     REPEAT ;
@@ -33,7 +33,7 @@ CREATE TOKEN 1024 ALLOT
 : .>TOKEN ( -- # c )
     0 .SKIP-SPACE
     BEGIN
-        DUP 4 <> 
+        DUP 4 <>
         OVER IS-SPACE? 0= AND WHILE
         OVER TOKEN + C!
         1+ _KEY
@@ -64,4 +64,32 @@ CREATE TOKEN 1024 ALLOT
         _EMIT
     REPEAT ?EMIT ;
 
+: LINKED-LIST \ name --
+    CREATE 0 , ;
+
+: L, ( list addr # n -- )
+    >R ROT HERE              \ addr # list new@
+    OVER @ ,                 \ addr # list new@   | link is compiled
+    R>     ,                 \ addr # list new@   | n is compiled
+    SWAP !                   \ addr #             | new link is saved
+    S, ;
+
+: LINK>LINK ( list -- link )
+    @ ;
+
+: LINK>NAME ( link -- addr )
+    CELL+ CELL+ ;
+
+: LINK>VALUE ( link -- n )
+    CELL+ @ ;
+
+: FIND-LINK ( list addr # -- link|0 )
+    2>R LINK>LINK
+    BEGIN
+        DUP ?DUP IF 
+            LINK>NAME COUNT
+            2R@ COMPARE 
+        ELSE 0 THEN WHILE
+        LINK>LINK
+    REPEAT 2R> 2DROP ;
 
