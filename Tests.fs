@@ -34,7 +34,7 @@ VARIABLE _#INPUT
 : ?OUTPUT ( addr # -- ? )
     _OUTPUT _OUTPUT# @
     COMPARE 0 ?S ;
-  
+ 
 ' EMIT>! IS _EMIT
 ' TYPE>! IS _TYPE
 ' KEY<@ IS _KEY
@@ -153,6 +153,35 @@ T{ ." TOKENS include all forth standard words with their category " CR
     TOKENS S" UNUSED" FIND-LINK LINK>VALUE ADDRESS-CATEGORY ?S
     TOKENS S" CREATE" FIND-LINK LINK>VALUE DEFINING-CATEGORY ?S
     TOKENS S" ENDIF" FIND-LINK LINK>VALUE CONTROL-CATEGORY ?S
+    TOKENS S\" S\"" FIND-LINK LINK>VALUE STRING-CATEGORY ?S
+    TOKENS S\" .\"" FIND-LINK LINK>VALUE STRING-CATEGORY ?S
+    TOKENS S" (" FIND-LINK LINK>VALUE COMMENT-CATEGORY ?S
+    TOKENS S" \" FIND-LINK LINK>VALUE LINE-COMMENT-CATEGORY ?S
 }T
+
+T{ ." .TOKEN display a token in its color if it's found in tokens" CR
+    RESET-OUTPUT
+    S" SWAP" .TOKEN
+    S\" \e[33mSWAP" ?OUTPUT
+    RESET-OUTPUT
+    S" ELSE" .TOKEN
+    S\" \e[31mELSE" ?OUTPUT
+}T
+
+T{ ." .TOKEN display a token in standard color if it's not found in tokens" CR
+    RESET-OUTPUT
+    S" LIST" .TOKEN
+    S\" \e[0mLIST" ?OUTPUT
+}T
+T{ ." .TOKEN display a token in number color if it's not a forth word" CR
+    RESET-OUTPUT
+    S" 4807" .TOKEN
+    S\" \e[32m4807" ?OUTPUT
+}T
+T{ ." .SOURCE display forth source code with colors" CR
+    S" SWAP + IF DROP THEN" SET-INPUT
+    RESET-OUTPUT
+    .SOURCE
+    S\" \e[33mSWAP \e[34m+ \e[31mIF \e[33mDROP \e[31mTHEN" ?OUTPUT
 BYE
 
