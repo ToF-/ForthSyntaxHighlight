@@ -1,0 +1,158 @@
+<pre style="color:#000000;background:#ffffff;"><span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">SQ</span> <span style="color:#800080; font-weight:bold;">(</span> n -- n^2 ) <span style="color:#66cdaa; font-weight:bold;">DUP</span> <span style="color:#0000ff; font-weight:bold;">*</span> ;</span>
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">W,</span> <span style="color:#800080; font-weight:bold;">(</span> w -- ) <span style="color:#008000; font-weight:bold;">256</span> <span style="color:#0000ff; font-weight:bold;">/MOD</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#808000; font-weight:bold;">C,</span> <span style="color:#808000; font-weight:bold;">C,</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">BYTE-POS</span> <span style="color:#800080; font-weight:bold;">(</span> set,bit# -- addr )
+    <span style="color:#008000; font-weight:bold;">8</span> <span style="color:#0000ff; font-weight:bold;">/MOD</span> <span style="color:#66cdaa; font-weight:bold;">ROT</span> <span style="color:#0000ff; font-weight:bold;">+</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">∈?</span> <span style="color:#800080; font-weight:bold;">(</span> set,bit# -- flag )
+    <span style="color:#008080; font-weight:bold;">BYTE-POS</span> <span style="color:#808000; font-weight:bold;">C@</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> 
+    <span style="color:#008000; font-weight:bold;">1</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#0000ff; font-weight:bold;">LSHIFT</span> <span style="color:#0000ff; font-weight:bold;">AND</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">¬∈!</span> <span style="color:#800080; font-weight:bold;">(</span> set,bit# -- )
+    <span style="color:#008080; font-weight:bold;">BYTE-POS</span> <span style="color:#66cdaa; font-weight:bold;">DUP</span> <span style="color:#808000; font-weight:bold;">C@</span> <span style="color:#66cdaa; font-weight:bold;">ROT</span> 
+    <span style="color:#008000; font-weight:bold;">1</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#0000ff; font-weight:bold;">LSHIFT</span> <span style="color:#008000; font-weight:bold;">255</span> <span style="color:#0000ff; font-weight:bold;">XOR</span> <span style="color:#0000ff; font-weight:bold;">AND</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#808000; font-weight:bold;">C!</span> ;</span> 
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">∈!</span> <span style="color:#800080; font-weight:bold;">(</span> set,bit# -- )
+    <span style="color:#008080; font-weight:bold;">BYTE-POS</span> <span style="color:#66cdaa; font-weight:bold;">DUP</span> <span style="color:#808000; font-weight:bold;">C@</span> <span style="color:#66cdaa; font-weight:bold;">ROT</span>
+    <span style="color:#008000; font-weight:bold;">1</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#0000ff; font-weight:bold;">LSHIFT</span> <span style="color:#0000ff; font-weight:bold;">OR</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#808000; font-weight:bold;">C!</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">IS-PRIME?</span> <span style="color:#800080; font-weight:bold;">(</span> n -- flag )
+    <span style="color:#66cdaa; font-weight:bold;">DUP</span> <span style="color:#008000; font-weight:bold;">2</span> <span style="color:#0000ff; font-weight:bold;"><</span> <span style="color:#ff8c00; font-weight:bold;">IF</span> <span style="color:#66cdaa; font-weight:bold;">DROP</span> <span style="color:#0000ff; font-weight:bold;">FALSE</span> <span style="color:#ff8c00; font-weight:bold;">ELSE</span>
+    <span style="color:#008000; font-weight:bold;">2</span> <span style="color:#ff8c00; font-weight:bold;">BEGIN</span>
+        <span style="color:#66cdaa; font-weight:bold;">2DUP</span> <span style="color:#008080; font-weight:bold;">SQ</span> <span style="color:#0000ff; font-weight:bold;">></span> <span style="color:#66cdaa; font-weight:bold;">>R</span> <span style="color:#66cdaa; font-weight:bold;">2DUP</span> <span style="color:#0000ff; font-weight:bold;">MOD</span> <span style="color:#0000ff; font-weight:bold;">0></span> <span style="color:#66cdaa; font-weight:bold;">R></span> <span style="color:#0000ff; font-weight:bold;">AND</span> 
+        <span style="color:#ff8c00; font-weight:bold;">WHILE</span> <span style="color:#0000ff; font-weight:bold;">1+</span> 
+    <span style="color:#ff8c00; font-weight:bold;">REPEAT</span> <span style="color:#008080; font-weight:bold;">SQ</span> <span style="color:#0000ff; font-weight:bold;"><</span> <span style="color:#ff8c00; font-weight:bold;">THEN</span> ;</span>
+
+<span style="color:#008000; font-weight:bold;">184</span>  <span style="color:#4682b4; font-weight:bold;">CONSTANT</span> <span style="color:#4682b4; font-weight:bold;">δ</span>       <span style="color:#008080; font-weight:bold;">δ</span> <span style="color:#008000; font-weight:bold;">8</span> <span style="color:#0000ff; font-weight:bold;">/</span> <span style="color:#4682b4; font-weight:bold;">CONSTANT</span> <span style="color:#4682b4; font-weight:bold;">δSET%</span>
+<span style="color:#008080; font-weight:bold;">δ</span> <span style="color:#008080; font-weight:bold;">SQ</span> <span style="color:#4682b4; font-weight:bold;">CONSTANT</span> <span style="color:#4682b4; font-weight:bold;">Δ</span>       <span style="color:#008080; font-weight:bold;">Δ</span> <span style="color:#008000; font-weight:bold;">8</span> <span style="color:#0000ff; font-weight:bold;">/</span> <span style="color:#4682b4; font-weight:bold;">CONSTANT</span> <span style="color:#4682b4; font-weight:bold;">ΔSET%</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">δPRIMES,</span> 
+    <span style="color:#008080; font-weight:bold;">δ</span> <span style="color:#008000; font-weight:bold;">2</span> <span style="color:#ff8c00; font-weight:bold;">BEGIN</span>
+        <span style="color:#66cdaa; font-weight:bold;">2DUP</span> <span style="color:#0000ff; font-weight:bold;">></span> <span style="color:#ff8c00; font-weight:bold;">WHILE</span>
+        <span style="color:#66cdaa; font-weight:bold;">DUP</span> <span style="color:#008080; font-weight:bold;">IS-PRIME?</span> <span style="color:#ff8c00; font-weight:bold;">IF</span> <span style="color:#66cdaa; font-weight:bold;">DUP</span> <span style="color:#808000; font-weight:bold;">C,</span> <span style="color:#ff8c00; font-weight:bold;">THEN</span>
+        <span style="color:#0000ff; font-weight:bold;">1+</span>
+    <span style="color:#ff8c00; font-weight:bold;">REPEAT</span> <span style="color:#66cdaa; font-weight:bold;">2DROP</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">CREATE</span> <span style="color:#4682b4; font-weight:bold;">δPRIMES</span> <span style="color:#008080; font-weight:bold;">δPRIMES,</span>
+<span style="color:#808000; font-weight:bold;">HERE</span> <span style="color:#008080; font-weight:bold;">δPRIMES</span> <span style="color:#0000ff; font-weight:bold;">-</span> <span style="color:#4682b4; font-weight:bold;">CONSTANT</span> <span style="color:#4682b4; font-weight:bold;">δPRIMES%</span> 
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">δPRIME#</span> <span style="color:#800080; font-weight:bold;">(</span> index -- prime ) <span style="color:#008080; font-weight:bold;">δPRIMES</span> <span style="color:#0000ff; font-weight:bold;">+</span> <span style="color:#808000; font-weight:bold;">C@</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">CREATE</span> <span style="color:#4682b4; font-weight:bold;">δSET</span> <span style="color:#008080; font-weight:bold;">δSET%</span> <span style="color:#808000; font-weight:bold;">ALLOT</span> <span style="color:#008080; font-weight:bold;">δSET</span> <span style="color:#008080; font-weight:bold;">δSET%</span> <span style="color:#008000; font-weight:bold;">255</span> <span style="color:#808000; font-weight:bold;">FILL</span>
+<span style="color:#4682b4; font-weight:bold;">CREATE</span> <span style="color:#4682b4; font-weight:bold;">ΔSET</span> <span style="color:#008080; font-weight:bold;">ΔSET%</span> <span style="color:#808000; font-weight:bold;">ALLOT</span> <span style="color:#008080; font-weight:bold;">ΔSET</span> <span style="color:#008080; font-weight:bold;">ΔSET%</span> <span style="color:#008000; font-weight:bold;">255</span> <span style="color:#808000; font-weight:bold;">FILL</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">Q</span> <span style="color:#800080; font-weight:bold;">(</span> start,prime -- offset )
+    <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#0000ff; font-weight:bold;">NEGATE</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#0000ff; font-weight:bold;">MOD</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">CALC-OFFSET</span> <span style="color:#800080; font-weight:bold;">(</span> start,prime -- offset )
+    <span style="color:#66cdaa; font-weight:bold;">OVER</span> <span style="color:#0000ff; font-weight:bold;">0></span> <span style="color:#ff8c00; font-weight:bold;">IF</span> <span style="color:#008080; font-weight:bold;">Q</span> <span style="color:#ff8c00; font-weight:bold;">ELSE</span> <span style="color:#66cdaa; font-weight:bold;">NIP</span> <span style="color:#0000ff; font-weight:bold;">2*</span> <span style="color:#ff8c00; font-weight:bold;">THEN</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">WITHIN-RANGE</span> <span style="color:#800080; font-weight:bold;">(</span> limit,offset,start -- flag )
+    <span style="color:#0000ff; font-weight:bold;">+</span> <span style="color:#0000ff; font-weight:bold;">></span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">SIEVE!</span> <span style="color:#800080; font-weight:bold;">(</span> set,limit,start,prime -- )
+    ASSERT(</span> <span style="color:#66cdaa; font-weight:bold;">OVER</span> <span style="color:#008000; font-weight:bold;">1</span> <span style="color:#0000ff; font-weight:bold;">AND</span> <span style="color:#0000ff; font-weight:bold;">0=</span> )</span>
+    <span style="color:#66cdaa; font-weight:bold;">2>R</span> <span style="color:#66cdaa; font-weight:bold;">2R@</span> <span style="color:#008080; font-weight:bold;">CALC-OFFSET</span>              
+    <span style="color:#ff8c00; font-weight:bold;">BEGIN</span> <span style="color:#66cdaa; font-weight:bold;">2DUP</span> <span style="color:#66cdaa; font-weight:bold;">2R@</span> <span style="color:#66cdaa; font-weight:bold;">DROP</span> <span style="color:#008080; font-weight:bold;">WITHIN-RANGE</span> <span style="color:#ff8c00; font-weight:bold;">WHILE</span>
+        <span style="color:#008000; font-weight:bold;">2</span> <span style="color:#66cdaa; font-weight:bold;">PICK</span> <span style="color:#66cdaa; font-weight:bold;">OVER</span> <span style="color:#008080; font-weight:bold;">¬∈!</span> <span style="color:#66cdaa; font-weight:bold;">R@</span> <span style="color:#0000ff; font-weight:bold;">+</span> 
+    <span style="color:#ff8c00; font-weight:bold;">REPEAT</span> <span style="color:#66cdaa; font-weight:bold;">2R></span> <span style="color:#66cdaa; font-weight:bold;">DROP</span> <span style="color:#66cdaa; font-weight:bold;">2DROP</span> <span style="color:#66cdaa; font-weight:bold;">2DROP</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">SIEVE-ITER!</span> <span style="color:#800080; font-weight:bold;">(</span> set,limit,start,prime -- set,limit,start )
+    <span style="color:#66cdaa; font-weight:bold;">2OVER</span> <span style="color:#66cdaa; font-weight:bold;">2OVER</span> <span style="color:#008080; font-weight:bold;">SIEVE!</span> <span style="color:#66cdaa; font-weight:bold;">DROP</span> ;</span>
+
+<span style="color:#008000; font-weight:bold;">2</span> BASE</span> <span style="color:#808000; font-weight:bold;">!</span> 
+<span style="color:#008000; font-weight:bold;">10101100</span> <span style="color:#4682b4; font-weight:bold;">CONSTANT</span> <span style="color:#4682b4; font-weight:bold;">INITIAL-BITS</span>
+<span style="color:#008000; font-weight:bold;">10101010</span> <span style="color:#4682b4; font-weight:bold;">CONSTANT</span> <span style="color:#4682b4; font-weight:bold;">ODD-BITS</span>
+DECIMAL</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">SET-INITIAL-BITS</span> <span style="color:#800080; font-weight:bold;">(</span> set,start )
+    <span style="color:#0000ff; font-weight:bold;">0=</span> <span style="color:#ff8c00; font-weight:bold;">IF</span> <span style="color:#008080; font-weight:bold;">INITIAL-BITS</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#808000; font-weight:bold;">C!</span> <span style="color:#ff8c00; font-weight:bold;">ELSE</span> <span style="color:#66cdaa; font-weight:bold;">DROP</span> <span style="color:#ff8c00; font-weight:bold;">THEN</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">INIT-SET</span> <span style="color:#800080; font-weight:bold;">(</span> start,set,size -- )
+    <span style="color:#66cdaa; font-weight:bold;">OVER</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#008080; font-weight:bold;">ODD-BITS</span> <span style="color:#808000; font-weight:bold;">FILL</span>
+    <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#008080; font-weight:bold;">SET-INITIAL-BITS</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">δ-SIEVES!</span> <span style="color:#800080; font-weight:bold;">(</span> limit,start -- )
+    <span style="color:#66cdaa; font-weight:bold;">DUP</span> <span style="color:#008080; font-weight:bold;">δSET</span> <span style="color:#008080; font-weight:bold;">δSET%</span> <span style="color:#008080; font-weight:bold;">INIT-SET</span>
+    <span style="color:#008080; font-weight:bold;">δSET</span> <span style="color:#66cdaa; font-weight:bold;">-ROT</span> 
+    <span style="color:#008080; font-weight:bold;">δPRIMES%</span> <span style="color:#008000; font-weight:bold;">0</span> <span style="color:#ff8c00; font-weight:bold;">DO</span> <span style="color:#ff8c00; font-weight:bold;">I</span> <span style="color:#008080; font-weight:bold;">δPRIME#</span> <span style="color:#008080; font-weight:bold;">SIEVE-ITER!</span> <span style="color:#ff8c00; font-weight:bold;">LOOP</span>
+    <span style="color:#66cdaa; font-weight:bold;">2DROP</span> <span style="color:#66cdaa; font-weight:bold;">DROP</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">ΔPRIME,</span> <span style="color:#800080; font-weight:bold;">(</span> start,bit# -- start ) 
+    <span style="color:#66cdaa; font-weight:bold;">OVER</span> <span style="color:#0000ff; font-weight:bold;">+</span> <span style="color:#66cdaa; font-weight:bold;">DUP</span> <span style="color:#008000; font-weight:bold;">2</span> <span style="color:#0000ff; font-weight:bold;">>=</span> <span style="color:#ff8c00; font-weight:bold;">IF</span> <span style="color:#008080; font-weight:bold;">W,</span> <span style="color:#ff8c00; font-weight:bold;">ELSE</span> <span style="color:#66cdaa; font-weight:bold;">DROP</span> <span style="color:#ff8c00; font-weight:bold;">THEN</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">SETSTART</span>  <span style="color:#800080; font-weight:bold;">(</span> size,index -- start ) <span style="color:#0000ff; font-weight:bold;">*</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">SETLIMITS</span> <span style="color:#800080; font-weight:bold;">(</span> size,index -- limit,start )
+    <span style="color:#66cdaa; font-weight:bold;">OVER</span> <span style="color:#008080; font-weight:bold;">SETSTART</span> <span style="color:#66cdaa; font-weight:bold;">TUCK</span> <span style="color:#0000ff; font-weight:bold;">+</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">δSET-ΔPRIME,</span> <span style="color:#800080; font-weight:bold;">(</span> start -- )
+    <span style="color:#008080; font-weight:bold;">δ</span> <span style="color:#008000; font-weight:bold;">0</span> <span style="color:#ff8c00; font-weight:bold;">DO</span> 
+        <span style="color:#008080; font-weight:bold;">δSET</span> <span style="color:#ff8c00; font-weight:bold;">I</span> <span style="color:#008080; font-weight:bold;">∈?</span> <span style="color:#ff8c00; font-weight:bold;">IF</span> <span style="color:#ff8c00; font-weight:bold;">I</span> <span style="color:#008080; font-weight:bold;">ΔPRIME,</span> <span style="color:#ff8c00; font-weight:bold;">THEN</span> 
+    <span style="color:#ff8c00; font-weight:bold;">LOOP</span> <span style="color:#66cdaa; font-weight:bold;">DROP</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">ΔPRIMES,</span>
+    <span style="color:#008080; font-weight:bold;">δ</span> <span style="color:#008000; font-weight:bold;">0</span> <span style="color:#ff8c00; font-weight:bold;">DO</span>
+        <span style="color:#008080; font-weight:bold;">δ</span> <span style="color:#ff8c00; font-weight:bold;">I</span> <span style="color:#008080; font-weight:bold;">SETLIMITS</span> <span style="color:#008080; font-weight:bold;">δ-SIEVES!</span>
+        <span style="color:#008080; font-weight:bold;">δ</span> <span style="color:#ff8c00; font-weight:bold;">I</span> <span style="color:#008080; font-weight:bold;">SETSTART</span> <span style="color:#008080; font-weight:bold;">δSET-ΔPRIME,</span> 
+    <span style="color:#ff8c00; font-weight:bold;">LOOP</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">CREATE</span> <span style="color:#4682b4; font-weight:bold;">ΔPRIMES</span> <span style="color:#008080; font-weight:bold;">ΔPRIMES,</span>
+<span style="color:#808000; font-weight:bold;">HERE</span> <span style="color:#008080; font-weight:bold;">ΔPRIMES</span> <span style="color:#0000ff; font-weight:bold;">-</span> <span style="color:#0000ff; font-weight:bold;">2/</span> <span style="color:#4682b4; font-weight:bold;">CONSTANT</span> <span style="color:#4682b4; font-weight:bold;">ΔPRIMES%</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">ΔPRIME#</span> <span style="color:#800080; font-weight:bold;">(</span> index -- prime )
+    <span style="color:#0000ff; font-weight:bold;">2*</span> <span style="color:#008080; font-weight:bold;">ΔPRIMES</span> <span style="color:#0000ff; font-weight:bold;">+</span> W@</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">Δ-SIEVES!</span> <span style="color:#800080; font-weight:bold;">(</span> limit,start -- )
+    <span style="color:#66cdaa; font-weight:bold;">DUP</span> <span style="color:#008080; font-weight:bold;">ΔSET</span> <span style="color:#008080; font-weight:bold;">ΔSET%</span> <span style="color:#008080; font-weight:bold;">INIT-SET</span>
+    <span style="color:#008080; font-weight:bold;">ΔSET</span> <span style="color:#66cdaa; font-weight:bold;">-ROT</span> 
+    <span style="color:#008080; font-weight:bold;">ΔPRIMES%</span> <span style="color:#008000; font-weight:bold;">1</span> <span style="color:#ff8c00; font-weight:bold;">DO</span> <span style="color:#ff8c00; font-weight:bold;">I</span> <span style="color:#008080; font-weight:bold;">ΔPRIME#</span> <span style="color:#008080; font-weight:bold;">SIEVE-ITER!</span> <span style="color:#ff8c00; font-weight:bold;">LOOP</span>
+    <span style="color:#66cdaa; font-weight:bold;">2DROP</span> <span style="color:#66cdaa; font-weight:bold;">DROP</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">WITHIN-LIMITS?</span> <span style="color:#800080; font-weight:bold;">(</span> max,min,start,bit# -- flag )
+    <span style="color:#0000ff; font-weight:bold;">+</span> <span style="color:#66cdaa; font-weight:bold;">DUP</span> <span style="color:#66cdaa; font-weight:bold;">ROT</span> <span style="color:#0000ff; font-weight:bold;">>=</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#66cdaa; font-weight:bold;">ROT</span> <span style="color:#0000ff; font-weight:bold;"><=</span> <span style="color:#0000ff; font-weight:bold;">AND</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">.PRIMES-WITHIN</span> <span style="color:#800080; font-weight:bold;">(</span> max,min,start,bit# -- max,min,start )
+    <span style="color:#66cdaa; font-weight:bold;">2OVER</span> <span style="color:#66cdaa; font-weight:bold;">2OVER</span> 
+    <span style="color:#008080; font-weight:bold;">WITHIN-LIMITS?</span> <span style="color:#ff8c00; font-weight:bold;">IF</span>
+        <span style="color:#66cdaa; font-weight:bold;">OVER</span> <span style="color:#0000ff; font-weight:bold;">+</span> <span style="color:#0000ff; font-weight:bold;">.</span> CR</span>
+    <span style="color:#ff8c00; font-weight:bold;">ELSE</span>
+        <span style="color:#66cdaa; font-weight:bold;">DROP</span>
+    <span style="color:#ff8c00; font-weight:bold;">THEN</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">.ΔSET-PRIMES-WITHIN</span> <span style="color:#800080; font-weight:bold;">(</span> max,min,start -- max,min )
+    <span style="color:#008080; font-weight:bold;">Δ</span> <span style="color:#008000; font-weight:bold;">0</span> <span style="color:#ff8c00; font-weight:bold;">DO</span> 
+        <span style="color:#008080; font-weight:bold;">ΔSET</span> <span style="color:#ff8c00; font-weight:bold;">I</span> <span style="color:#008080; font-weight:bold;">∈?</span> <span style="color:#ff8c00; font-weight:bold;">IF</span> <span style="color:#ff8c00; font-weight:bold;">I</span> <span style="color:#008080; font-weight:bold;">.PRIMES-WITHIN</span> <span style="color:#ff8c00; font-weight:bold;">THEN</span> 
+    <span style="color:#ff8c00; font-weight:bold;">LOOP</span> <span style="color:#66cdaa; font-weight:bold;">DROP</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">.PRIMES</span> <span style="color:#800080; font-weight:bold;">(</span> max,min -- )
+    <span style="color:#66cdaa; font-weight:bold;">2DUP</span>
+    <span style="color:#008080; font-weight:bold;">Δ</span> <span style="color:#0000ff; font-weight:bold;">/</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#008080; font-weight:bold;">Δ</span> <span style="color:#0000ff; font-weight:bold;">/</span> <span style="color:#0000ff; font-weight:bold;">1+</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span>
+    <span style="color:#ff8c00; font-weight:bold;">DO</span>
+        <span style="color:#008080; font-weight:bold;">Δ</span> <span style="color:#ff8c00; font-weight:bold;">I</span> <span style="color:#008080; font-weight:bold;">SETLIMITS</span> <span style="color:#008080; font-weight:bold;">Δ-SIEVES!</span>
+        <span style="color:#008080; font-weight:bold;">Δ</span> <span style="color:#ff8c00; font-weight:bold;">I</span> <span style="color:#008080; font-weight:bold;">SETSTART</span> <span style="color:#008080; font-weight:bold;">.ΔSET-PRIMES-WITHIN</span> 
+    <span style="color:#ff8c00; font-weight:bold;">LOOP</span> <span style="color:#66cdaa; font-weight:bold;">2DROP</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">TO-DIGIT</span> <span style="color:#800080; font-weight:bold;">(</span> char -- n )
+    [CHAR]</span> <span style="color:#008000; font-weight:bold;">0</span> <span style="color:#0000ff; font-weight:bold;">-</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">IS-DIGIT?</span> <span style="color:#800080; font-weight:bold;">(</span> char -- flag )
+    <span style="color:#008080; font-weight:bold;">TO-DIGIT</span> <span style="color:#66cdaa; font-weight:bold;">DUP</span> <span style="color:#008000; font-weight:bold;">0</span> <span style="color:#0000ff; font-weight:bold;">>=</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#008000; font-weight:bold;">9</span> <span style="color:#0000ff; font-weight:bold;"><=</span> <span style="color:#0000ff; font-weight:bold;">AND</span> ;</span>     
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">SKIP-NON-DIGIT</span> <span style="color:#800080; font-weight:bold;">(</span> -- char )
+    <span style="color:#ff8c00; font-weight:bold;">BEGIN</span> KEY</span> <span style="color:#66cdaa; font-weight:bold;">DUP</span> <span style="color:#008080; font-weight:bold;">IS-DIGIT?</span> <span style="color:#0000ff; font-weight:bold;">0=</span> <span style="color:#ff8c00; font-weight:bold;">WHILE</span> <span style="color:#66cdaa; font-weight:bold;">DROP</span> <span style="color:#ff8c00; font-weight:bold;">REPEAT</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">GET-NUMBER</span> <span style="color:#800080; font-weight:bold;">(</span> -- n )
+    <span style="color:#008080; font-weight:bold;">SKIP-NON-DIGIT</span>  
+    <span style="color:#008000; font-weight:bold;">0</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span>          <span style="color:#800080; font-weight:bold;">\</span> accumulator
+    <span style="color:#ff8c00; font-weight:bold;">BEGIN</span>
+        <span style="color:#008080; font-weight:bold;">TO-DIGIT</span> <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#008000; font-weight:bold;">10</span> <span style="color:#0000ff; font-weight:bold;">*</span> <span style="color:#0000ff; font-weight:bold;">+</span> 
+        KEY</span> <span style="color:#66cdaa; font-weight:bold;">DUP</span> <span style="color:#008080; font-weight:bold;">IS-DIGIT?</span> 
+    <span style="color:#0000ff; font-weight:bold;">0=</span> <span style="color:#ff8c00; font-weight:bold;">UNTIL</span> <span style="color:#66cdaa; font-weight:bold;">DROP</span> ;</span>
+
+<span style="color:#4682b4; font-weight:bold;">:</span> <span style="color:#4682b4; font-weight:bold;">MAIN</span>
+    <span style="color:#008080; font-weight:bold;">GET-NUMBER</span> <span style="color:#008000; font-weight:bold;">0</span> <span style="color:#ff8c00; font-weight:bold;">DO</span>
+        <span style="color:#008080; font-weight:bold;">GET-NUMBER</span> <span style="color:#008080; font-weight:bold;">GET-NUMBER</span>
+        <span style="color:#66cdaa; font-weight:bold;">SWAP</span> <span style="color:#008080; font-weight:bold;">.PRIMES</span> CR</span>
+    <span style="color:#ff8c00; font-weight:bold;">LOOP</span> ;</span>
+</pre>

@@ -1,0 +1,18 @@
+    keywordstyle=[0]\color{NavyBlue},
+    keywordstyle=[1]\color{Orange},
+    keywordstyle=[2]\color{darkgreen},
+    keywordstyle=[3]\color{darkcyan},
+    keywordstyle=[4]\color{RoyalPurple},
+    keywordstyle=[5]\color{Red},
+	stringstyle=\color{RoyalPurple},
+    commentstyle=\color{Black},
+\definecolor{lightgray}{rgb}{.95,.95,.95}
+\definecolor{darkgreen}{rgb}{0, .50, 0}
+\definecolor{verylightgreen}{cmyk}{.010, 0, .010, 0}
+\definecolor{verylightred}{cmyk}{.000, 0.05, .010, 0}
+\definecolor{verylightblue}{cmyk}{.020, 0, .00, 0}
+\definecolor{lightblue}{cmyk}{.050, 0, .00, 0}
+\definecolor{verylightyellow}{cmyk}{0,0,.05,0}
+\definecolor{orange}{rgb}{.91,.54,.17}
+\definecolor{darkcyan}{rgb}{0.0, 0.55, 0.55}
+\definecolor{pinegreen}{rgb}{0.0, 0.47, 0.44}

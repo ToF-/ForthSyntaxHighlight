@@ -4,28 +4,46 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-,T	Highlight.fs	/^,T :         ,T CREATE    ,T VARIABLE  ,T CONSTANT  ,T 2VARIABLE ,T 2CONSTANT $/;"	a
-,T	Highlight.fs	/^,T :         ,T CREATE    ,T VARIABLE  ,T CONSTANT  ,T 2VARIABLE ,T 2CONSTANT $/;"	c
-,T	Highlight.fs	/^,T :         ,T CREATE    ,T VARIABLE  ,T CONSTANT  ,T 2VARIABLE ,T 2CONSTANT $/;"	v
+,T	Highlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	a
+,T	Highlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	c
+,T	Highlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	v
 ,T	Highlight.fs	/^: ,T \\ cccccc\/bl$/;"	d
+.<PRE>	Highlight.fs	/^: .<PRE>$/;"	d
+.<SPAN>	Highlight.fs	/^: .<SPAN> ( col ? -- )$/;"	d
 .>TOKEN	Highlight.fs	/^: .>TOKEN ( -- # c )$/;"	d
-.COLOR	Highlight.fs	/^: .COLOR ( c -- )$/;"	d
+.DUMP	Tests.fs	/^: .DUMP$/;"	d
+.HEXBYTE	Highlight.fs	/^: .HEXBYTE ( c -- )$/;"	d
+.HEXDIGIT	Highlight.fs	/^: .HEXDIGIT ( n -- )$/;"	d
+.OUTPUT	Tests.fs	/^: .OUTPUT ( addr # -- )$/;"	d
+.RGB-COLOR	Highlight.fs	/^: .RGB-COLOR ( n -- )$/;"	d
 .SKIP-COMMENT	Highlight.fs	/^: .SKIP-COMMENT$/;"	d
 .SKIP-LINE	Highlight.fs	/^: .SKIP-LINE$/;"	d
 .SKIP-SPACE	Highlight.fs	/^: .SKIP-SPACE ( -- c )$/;"	d
 .SKIP-STRING	Highlight.fs	/^: .SKIP-STRING$/;"	d
+.SOURCE	Highlight.fs	/^: .SOURCE$/;"	d
+.TOKEN	Highlight.fs	/^: .TOKEN ( addr # -- )$/;"	d
 0	Highlight.fs	/^    CREATE 0 , ;$/;"	a
-?EMIT	Highlight.fs	/^: ?EMIT ( c -- )$/;"	d
 ?OUTPUT	Tests.fs	/^: ?OUTPUT ( addr # -- ? )$/;"	d
+?_EMIT	Highlight.fs	/^: ?_EMIT ( c -- )$/;"	d
 ADDRESS-CATEGORY	Highlight.fs	/^10 CONSTANT ADDRESS-CATEGORY$/;"	c
+ANSI-COLOR	Highlight.fs	/^: ANSI-COLOR ( c -- )$/;"	d
+ANSI-NORMAL	Highlight.fs	/^: ANSI-NORMAL$/;"	d
+BOLD	Highlight.fs	/^VARIABLE BOLD $/;"	v
 CATEGORY	Highlight.fs	/^VARIABLE CATEGORY$/;"	v
+CATEGORY>COLOR	Highlight.fs	/^: CATEGORY>COLOR ( n -- n )$/;"	d
+COLORS	Highlight.fs	/^CREATE COLORS$/;"	a
+COMMENT	Highlight.fs	/^VARIABLE COMMENT$/;"	v
 COMMENT-CATEGORY	Highlight.fs	/^ 3 CONSTANT COMMENT-CATEGORY$/;"	c
 CONTROL-CATEGORY	Highlight.fs	/^ 8 CONSTANT CONTROL-CATEGORY$/;"	c
+DEFINE-COLOR	Highlight.fs	/^: DEFINE-COLOR$/;"	d
+DEFINING	Highlight.fs	/^VARIABLE DEFINING$/;"	v
 DEFINING-CATEGORY	Highlight.fs	/^ 6 CONSTANT DEFINING-CATEGORY$/;"	c
 EMIT>!	Tests.fs	/^: EMIT>! ( c -- )$/;"	d
 FIND-LINK	Highlight.fs	/^: FIND-LINK ( list addr # -- link|0 )$/;"	d
+HTML	Highlight.fs	/^VARIABLE HTML$/;"	v
 IS-SPACE?	Highlight.fs	/^: IS-SPACE? ( c -- ? )$/;"	d
 KEY<@	Tests.fs	/^: KEY<@ ( -- c )$/;"	d
+LINE-COMMENT	Highlight.fs	/^VARIABLE LINE-COMMENT$/;"	v
 LINE-COMMENT-CATEGORY	Highlight.fs	/^ 4 CONSTANT LINE-COMMENT-CATEGORY$/;"	c
 LINK,	Highlight.fs	/^: LINK, ( list addr # n -- )$/;"	d
 LINK>LINK	Highlight.fs	/^: LINK>LINK ( list -- link )$/;"	d
@@ -36,10 +54,16 @@ NAME-CATEGORY	Highlight.fs	/^ 0 CONSTANT NAME-CATEGORY$/;"	c
 NEW-WORD-CATEGORY	Highlight.fs	/^ 5 CONSTANT NEW-WORD-CATEGORY$/;"	c
 NUMBER-CATEGORY	Highlight.fs	/^ 1 CONSTANT NUMBER-CATEGORY$/;"	c
 OPERATOR-CATEGORY	Highlight.fs	/^ 7 CONSTANT OPERATOR-CATEGORY$/;"	c
+PRE-BACKGROUND	Highlight.fs	/^VARIABLE PRE-BACKGROUND$/;"	v
+PRE-COLOR	Highlight.fs	/^VARIABLE PRE-COLOR$/;"	v
 RESET-OUTPUT	Tests.fs	/^: RESET-OUTPUT$/;"	d
+RGB-COLORS	Highlight.fs	/^CREATE RGB-COLORS$/;"	a
 SET-INPUT	Tests.fs	/^: SET-INPUT ( addr # -- )$/;"	d
 STACK-CATEGORY	Highlight.fs	/^ 9 CONSTANT STACK-CATEGORY$/;"	c
+STAR	sample.fs	/^: STAR $/;"	d
+STRING	Highlight.fs	/^VARIABLE STRING$/;"	v
 STRING-CATEGORY	Highlight.fs	/^ 2 CONSTANT STRING-CATEGORY$/;"	c
+TESTING	Tests.fs	/^1 CONSTANT TESTING$/;"	c
 TOKEN	Highlight.fs	/^CREATE TOKEN 1024 ALLOT$/;"	a
 TYPE>!	Tests.fs	/^: TYPE>! ( addr # -- )$/;"	d
 _#INPUT	Tests.fs	/^VARIABLE _#INPUT$/;"	v

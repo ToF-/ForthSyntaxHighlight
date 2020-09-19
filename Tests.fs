@@ -39,6 +39,9 @@ VARIABLE _#INPUT
 : .OUTPUT ( addr # -- )
     _OUTPUT _OUTPUT# @ TYPE ;
 
+: .DUMP
+    _OUTPUT _OUTPUT# @ DUMP ;
+
 ' EMIT>! IS _EMIT
 ' TYPE>! IS _TYPE
 ' KEY<@ IS _KEY
@@ -63,11 +66,10 @@ T{ ." _KEY can be redirected for the sake of testing" CR
     _KEY 4 ?S
 }T
 
-T{ ." .COLOR changes the terminal color" CR
+T{ ." _COLOR changes the terminal color" CR
     RESET-OUTPUT
-    2 .COLOR
-    _OUTPUT C@ 27 ?S
-    _OUTPUT 1+ 4 S" [32m" COMPARE 0 ?S
+    2 _COLOR
+    S\" \e[32m" ?OUTPUT
 }T
 
 T{ ." .SKIP-SPACE prints input chars until non space found" CR
@@ -212,6 +214,49 @@ T{ ." .SOURCE display new definitions in their proper color" CR
     RESET-OUTPUT
     .SOURCE
     S\" \e[37m: \e[37mSTAR \e[32m42 \e[0mEMIT \e[0m; \e[37m: \e[37mSTARS \e[32m0 \e[31mDO \e[36mSTAR \e[31mLOOP \e[0m; \e[32m10 \e[36mSTARS" ?OUTPUT
+}T
+
+T{ ." .<PRE> display a pre tag with default color and background" CR 
+    RESET-OUTPUT
+    .<PRE> 
+    S\" <pre style=\"color:#000000;background:#ffffff;\">" ?OUTPUT
+}T
+T{ ." .<PRE> display a pre tag with customized color and background" CR 
+    RESET-OUTPUT
+    4807 PRE-COLOR ! 42 PRE-BACKGROUND !
+    .<PRE> 
+    S\" <pre style=\"color:#0012c7;background:#00002a;\">" ?OUTPUT
+}T
+T{ ." .<SPAN> display a span tag with a color and boldness switch" CR 
+    RESET-OUTPUT
+    4807 -1 .<SPAN>
+    S\" <span style=\"color:#0012c7; font-weight:bold;\">" ?OUTPUT
+}T
+T{ ." .<SPAN> display a span tag with a color and boldness switch off" CR 
+    RESET-OUTPUT
+    4807 0 .<SPAN>
+    S\" <span style=\"color:#0012c7;\">" ?OUTPUT
+}T
+T{ ." CATEGORY>COLOR value depends on HTML option " CR
+    COMMENT-CATEGORY CATEGORY>COLOR 5 ?S
+    HTML ON
+    COMMENT-CATEGORY CATEGORY>COLOR HEX 800080 ?S DECIMAL
+    HTML OFF
+}T
+T{ ." _COLOR changes the html color if HTML is on" CR
+    TRUE HTML !
+    DEFINE-COLOR
+    RESET-OUTPUT
+    NUMBER-CATEGORY CATEGORY>COLOR _COLOR 
+    S\" <span style=\"color:#008000; font-weight:bold;\">" ?OUTPUT 
+}T
+
+T{ ." .SOURCE display html source code with colors" CR
+    S" SWAP + IF DROP THEN" SET-INPUT
+    RESET-OUTPUT
+    TRUE HTML !
+    .SOURCE
+    S\" <pre style=\"color:#0012c7;background:#00002a;\"><span style=\"color:#808000; font-weight:bold;\">SWAP</span> <span style=\"color:#0000ff; font-weight:bold;\">+</span> <span style=\"color:#ff00ff; font-weight:bold;\">IF</span> <span style=\"color:#808000; font-weight:bold;\">DROP</span> <span style=\"color:#ff00ff; font-weight:bold;\">THEN</span></pre>" ?OUTPUT
 }T
 BYE
 
