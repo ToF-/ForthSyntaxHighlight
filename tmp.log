@@ -1,0 +1,28 @@
+gforth-itc Tests.fs
+_EMIT can be redirected for the sake of testing
+_TYPE can be redirected for the sake of testing
+_KEY can be redirected for the sake of testing
+.COLOR changes the terminal color
+.SKIP-SPACE prints input chars until non space found
+.SKIP-SPACE prints input chars until non space found
+.SKIP-SPACE yields EOF is no input chars anymore
+.>TOKEN gets the next token from the input stream
+.SKIP-LINE prints input chars until end of line
+.SKIP-LINE prints input chars until end of input
+.SKIP-COMMENT prints input chars until end of comment or input
+.SKIP-STRING prints input chars until double quote or end of input
+a LINKED-LIST starts with 0 as the first link 
+LINK, adds an item to a new linked list links to 0 
+FIND-LINK finds an item or returns 0 
+TOKENS include all forth standard words with their category 
+.TOKEN display a token in its color if it's found in tokens
+.TOKEN display a token in standard color if it's not found in tokens
+.TOKEN display a token in number color if it's not a forth word
+.SOURCE display forth source code with colors
+.SOURCE display strings in their proper color
+.SOURCE display comments in their proper color
+stack contents mismatch:     S\" \e[35m( SWAP DUP + ELSE) \e[33mDROP" ?OUTPUT
+  expecting 0 and found 1 
+.SOURCE display line comments in their proper color
+[33mSWAP [35m\ DUP + ELSE DROPstack contents mismatch:     S\" \e[33mSWAP \e[35m\ DUP + ELSE DROP" ?OUTPUT
+  expecting 0 and found -1 

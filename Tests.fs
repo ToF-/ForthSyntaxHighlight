@@ -34,7 +34,10 @@ VARIABLE _#INPUT
 : ?OUTPUT ( addr # -- ? )
     _OUTPUT _OUTPUT# @
     COMPARE 0 ?S ;
- 
+
+: .OUTPUT ( addr # -- )
+    _OUTPUT _OUTPUT# @ TYPE ;
+
 ' EMIT>! IS _EMIT
 ' TYPE>! IS _TYPE
 ' KEY<@ IS _KEY
@@ -183,5 +186,30 @@ T{ ." .SOURCE display forth source code with colors" CR
     RESET-OUTPUT
     .SOURCE
     S\" \e[33mSWAP \e[34m+ \e[31mIF \e[33mDROP \e[31mTHEN" ?OUTPUT
+}T
+
+T{ ." .SOURCE display strings in their proper color" CR
+    S\" .\" SWAP DUP + ELSE\" DROP" SET-INPUT
+    RESET-OUTPUT
+    .SOURCE
+    S\" \e[32m.\" SWAP DUP + ELSE\" \e[33mDROP" ?OUTPUT
+}T
+T{ ." .SOURCE display comments in their proper color" CR
+    S\" ( SWAP DUP + ELSE) DROP" SET-INPUT
+    RESET-OUTPUT
+    .SOURCE
+    S\" \e[35m( SWAP DUP + ELSE) \e[33mDROP" ?OUTPUT
+}T
+T{ ." .SOURCE display line comments in their proper color" CR
+    S" SWAP \ DUP + ELSE DROP" SET-INPUT
+    RESET-OUTPUT
+    .SOURCE
+    S\" \e[33mSWAP \e[35m\\ DUP + ELSE DROP" ?OUTPUT
+}T
+T{ ." .SOURCE display new definitions in their proper color" CR
+    S" : STAR 42 EMIT ; STAR DUP" SET-INPUT
+    RESET-OUTPUT
+    .SOURCE
+    S\" \e[37m: \e[37mSTAR \e[32m42 \e[0mEMIT \e[0m; \e[36mSTAR \e[33mDUP" ?OUTPUT
 BYE
 
