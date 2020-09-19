@@ -1,4 +1,5 @@
 INCLUDE ffl/tst.fs
+1 CONSTANT TESTING
 INCLUDE HighLight.fs
 
 CREATE _OUTPUT 1024 ALLOT
@@ -207,9 +208,10 @@ T{ ." .SOURCE display line comments in their proper color" CR
     S\" \e[33mSWAP \e[35m\\ DUP + ELSE DROP" ?OUTPUT
 }T
 T{ ." .SOURCE display new definitions in their proper color" CR
-    S" : STAR 42 EMIT ; STAR DUP" SET-INPUT
+    S" : STAR 42 EMIT ; : STARS 0 DO STAR LOOP ; 10 STARS" SET-INPUT
     RESET-OUTPUT
     .SOURCE
-    S\" \e[37m: \e[37mSTAR \e[32m42 \e[0mEMIT \e[0m; \e[36mSTAR \e[33mDUP" ?OUTPUT
+    S\" \e[37m: \e[37mSTAR \e[32m42 \e[0mEMIT \e[0m; \e[37m: \e[37mSTARS \e[32m0 \e[31mDO \e[36mSTAR \e[31mLOOP \e[0m; \e[32m10 \e[36mSTARS" ?OUTPUT
+}T
 BYE
 
