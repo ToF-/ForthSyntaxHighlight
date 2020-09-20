@@ -33,8 +33,7 @@ VARIABLE _#INPUT
     _INPUT _#INPUT @ CMOVE ;
 
 : ?OUTPUT ( addr # -- ? )
-    _OUTPUT _OUTPUT# @
-    COMPARE 0 ?S ;
+    _OUTPUT _OUTPUT# @ STR= ?TRUE ;
 
 : .OUTPUT ( addr # -- )
     _OUTPUT _OUTPUT# @ TYPE ;
@@ -97,7 +96,7 @@ T{ ." .>TOKEN gets the next token from the input stream" CR
     S"    FOO  " SET-INPUT
     RESET-OUTPUT
     .>TOKEN 32 ?S
-    TOKEN SWAP S" FOO" COMPARE 0 ?S
+    TOKEN SWAP S" FOO" STR= ?TRUE
     S"    " ?OUTPUT
 }T
 
@@ -142,7 +141,7 @@ T{ ." a LINKED-LIST starts with 0 as the first link " CR
 T{ ." LINK, adds an item to a new linked list links to 0 " CR
     FOO S" Bar" 4807 LINK,
     FOO @ LINK>VALUE 4807 ?S
-    FOO @ LINK>NAME COUNT S" Bar" COMPARE 0 ?S
+    FOO @ LINK>NAME COUNT S" Bar" STR= ?TRUE
     FOO @ LINK>LINK 0 ?S
 }T
 
@@ -154,15 +153,15 @@ T{ ." FIND-LINK finds an item or returns 0 " CR
 }T
 
 T{ ." TOKENS include all forth standard words with their category " CR
-    TOKENS S" SWAP" FIND-LINK LINK>VALUE STACK-CATEGORY ?S
-    TOKENS S" /MOD" FIND-LINK LINK>VALUE OPERATOR-CATEGORY ?S
-    TOKENS S" UNUSED" FIND-LINK LINK>VALUE ADDRESS-CATEGORY ?S
-    TOKENS S" CREATE" FIND-LINK LINK>VALUE DEFINING-CATEGORY ?S
-    TOKENS S" ENDIF" FIND-LINK LINK>VALUE CONTROL-CATEGORY ?S
-    TOKENS S\" S\"" FIND-LINK LINK>VALUE STRING-CATEGORY ?S
-    TOKENS S\" .\"" FIND-LINK LINK>VALUE STRING-CATEGORY ?S
-    TOKENS S" (" FIND-LINK LINK>VALUE COMMENT-CATEGORY ?S
-    TOKENS S" \" FIND-LINK LINK>VALUE LINE-COMMENT-CATEGORY ?S
+    TOKENS S" SWAP" FIND-LINK LINK>VALUE $STACK ?S
+    TOKENS S" /MOD" FIND-LINK LINK>VALUE $OPERATOR ?S
+    TOKENS S" UNUSED" FIND-LINK LINK>VALUE $MEMORY ?S
+    TOKENS S" CREATE" FIND-LINK LINK>VALUE $DEFINING ?S
+    TOKENS S" ENDIF" FIND-LINK LINK>VALUE $CONTROL ?S
+    TOKENS S\" S\"" FIND-LINK LINK>VALUE $STRING ?S
+    TOKENS S\" .\"" FIND-LINK LINK>VALUE $STRING ?S
+    TOKENS S" (" FIND-LINK LINK>VALUE $COMMENT ?S
+    TOKENS S" \" FIND-LINK LINK>VALUE $LCOMMENT ?S
 }T
 
 T{ ." .TOKEN display a token in its color if it's found in tokens" CR
@@ -238,16 +237,16 @@ T{ ." .<SPAN> display a span tag with a color and boldness switch off" CR
     S\" <span style=\"color:#0012c7;\">" ?OUTPUT
 }T
 T{ ." CATEGORY>COLOR value depends on HTML option " CR
-    COMMENT-CATEGORY CATEGORY>COLOR 5 ?S
+    $COMMENT CATEGORY>COLOR 5 ?S
     HTML ON
-    COMMENT-CATEGORY CATEGORY>COLOR HEX 800080 ?S DECIMAL
+    $COMMENT CATEGORY>COLOR HEX 800080 ?S DECIMAL
     HTML OFF
 }T
 T{ ." _COLOR changes the html color if HTML is on" CR
     TRUE HTML !
     DEFINE-COLOR
     RESET-OUTPUT
-    NUMBER-CATEGORY CATEGORY>COLOR _COLOR 
+    $NUMBER CATEGORY>COLOR _COLOR 
     S\" <span style=\"color:#008000; font-weight:bold;\">" ?OUTPUT 
 }T
 
@@ -255,8 +254,14 @@ T{ ." .SOURCE display html source code with colors" CR
     S" SWAP + IF DROP THEN" SET-INPUT
     RESET-OUTPUT
     TRUE HTML !
+    HEX 808000 DECIMAL $STACK SET-RGB-COLOR 
+    HEX FF00FF DECIMAL $CONTROL SET-RGB-COLOR 
     .SOURCE
-    S\" <pre style=\"color:#0012c7;background:#00002a;\"><span style=\"color:#808000; font-weight:bold;\">SWAP</span> <span style=\"color:#0000ff; font-weight:bold;\">+</span> <span style=\"color:#ff00ff; font-weight:bold;\">IF</span> <span style=\"color:#808000; font-weight:bold;\">DROP</span> <span style=\"color:#ff00ff; font-weight:bold;\">THEN</span></pre>" ?OUTPUT
+    S\" <pre style=\"color:#0012c7;background:#00002a;\"><span style=\"color:#808000; font-weight:bold;\">SWAP</span> <span style=\"color:#0000ff; font-weight:bold;\">+</span> <span style=\"color:#ff00ff; font-weight:bold;\">IF</span> <span style=\"color:#808000; font-weight:bold;\">DROP</span> <span style=\"color:#ff00ff; font-weight:bold;\">THEN</span></pre>" ?OUTPUT 
+}T
+
+T{ ." >HEX-NUMBER converts a hex number string into a number" CR
+    S" 104A26" >HEX-NUMBER HEX 104A26 ?S DECIMAL
 }T
 BYE
 
