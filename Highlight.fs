@@ -316,13 +316,43 @@ VARIABLE _BASE
     0 S>D 2SWAP >NUMBER 2DROP D>S
     _BASE @ BASE ! ;
 
+: SPLIT-ARG ( addr # -- pos )
+    SWAP >R
+    0
+    BEGIN
+        2DUP
+        > WHILE
+        DUP R@ + C@ [CHAR] = = IF 
+            NIP R> DROP EXIT 
+        THEN
+        1+
+    REPEAT 
+    2DROP 0 R> DROP ;
+
+: READ-COLOR-ARG ( addr # -- )
+    2DUP SPLIT-ARG ?DUP IF   \ addr # p
+        >R                   \ addr #
+        2DUP R@ 1+ -         \ addr # addr #2
+        SWAP R@ 1+ +         \ addr # #2 addr2
+        SWAP >HEX-NUMBER -ROT \ u addr # 
+        DROP CATEGORIES SWAP  \ u cats addr
+        R> FIND-LINK 
+        ?DUP IF
+            LINK>VALUE 
+            CELLS RGB-COLORS + !
+        ELSE
+            ." wrong category" BYE
+        THEN
+    ELSE
+        2DROP
+    THEN ;
 
 : READ-ARG ( addr # -- )
     2DUP S" HTML" COMPARE 0= IF 
         TRUE HTML ! 
         DEFINE-COLOR 
     ELSE
-        2DROP
+        READ-COLOR-ARG
     THEN ;
 
 : READ-ARGS

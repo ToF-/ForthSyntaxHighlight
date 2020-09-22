@@ -263,5 +263,14 @@ T{ ." .SOURCE display html source code with colors" CR
 T{ ." >HEX-NUMBER converts a hex number string into a number" CR
     S" 104A26" >HEX-NUMBER HEX 104A26 ?S DECIMAL
 }T
-BYE
 
+T{ ." SPLIT-ARG finds the length of first part of category=color arg" CR
+    S" STACK=800080" SPLIT-ARG 5 ?S
+    S" FOO" SPLIT-ARG 0 ?S
+}T
+T{ ." READ-COLOR-ARG set a category color to a rgb value" CR
+    S" STACK=123456" READ-COLOR-ARG
+    CATEGORIES S" STACK" FIND-LINK LINK>VALUE CELLS RGB-COLORS + @ HEX 123456 DECIMAL ?S
+    S" FOO" READ-COLOR-ARG DEPTH 0 ?S
+}T
+BYE
