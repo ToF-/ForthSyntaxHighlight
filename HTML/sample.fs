@@ -1,0 +1,3 @@
+: STAR 
+    42 EMIT ;
+STAR BYE
