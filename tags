@@ -5,92 +5,239 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 $COMMENT	Highlight.fs	/^2 CONSTANT $COMMENT$/;"	c
+$COMMENT	HtmlHighlight.fs	/^2 CONSTANT $COMMENT$/;"	c
+$COMMENT	TermHighlight.fs	/^2 CONSTANT $COMMENT$/;"	c
 $CONTROL	Highlight.fs	/^7 CONSTANT $CONTROL$/;"	c
+$CONTROL	HtmlHighlight.fs	/^7 CONSTANT $CONTROL$/;"	c
+$CONTROL	TermHighlight.fs	/^7 CONSTANT $CONTROL$/;"	c
 $DEFINING	Highlight.fs	/^5 CONSTANT $DEFINING$/;"	c
+$DEFINING	HtmlHighlight.fs	/^5 CONSTANT $DEFINING$/;"	c
+$DEFINING	TermHighlight.fs	/^5 CONSTANT $DEFINING$/;"	c
 $LCOMMENT	Highlight.fs	/^3 CONSTANT $LCOMMENT$/;"	c
+$LCOMMENT	HtmlHighlight.fs	/^3 CONSTANT $LCOMMENT$/;"	c
+$LCOMMENT	TermHighlight.fs	/^3 CONSTANT $LCOMMENT$/;"	c
 $MEMORY	Highlight.fs	/^9 CONSTANT $MEMORY$/;"	c
+$MEMORY	HtmlHighlight.fs	/^9 CONSTANT $MEMORY$/;"	c
+$MEMORY	TermHighlight.fs	/^9 CONSTANT $MEMORY$/;"	c
 $NUMBER	Highlight.fs	/^0 CONSTANT $NUMBER$/;"	c
+$NUMBER	HtmlHighlight.fs	/^0 CONSTANT $NUMBER$/;"	c
+$NUMBER	TermHighlight.fs	/^0 CONSTANT $NUMBER$/;"	c
 $OPERATOR	Highlight.fs	/^6 CONSTANT $OPERATOR$/;"	c
+$OPERATOR	HtmlHighlight.fs	/^6 CONSTANT $OPERATOR$/;"	c
+$OPERATOR	TermHighlight.fs	/^6 CONSTANT $OPERATOR$/;"	c
 $STACK	Highlight.fs	/^8 CONSTANT $STACK$/;"	c
+$STACK	HtmlHighlight.fs	/^8 CONSTANT $STACK$/;"	c
+$STACK	TermHighlight.fs	/^8 CONSTANT $STACK$/;"	c
 $STRING	Highlight.fs	/^1 CONSTANT $STRING$/;"	c
+$STRING	HtmlHighlight.fs	/^1 CONSTANT $STRING$/;"	c
+$STRING	TermHighlight.fs	/^1 CONSTANT $STRING$/;"	c
 $USERDEF	Highlight.fs	/^4 CONSTANT $USERDEF$/;"	c
+$USERDEF	HtmlHighlight.fs	/^4 CONSTANT $USERDEF$/;"	c
+$USERDEF	TermHighlight.fs	/^4 CONSTANT $USERDEF$/;"	c
 ,T	Highlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	a
 ,T	Highlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	c
 ,T	Highlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	v
 ,T	Highlight.fs	/^: ,T \\ cccccc\/bl$/;"	d
+,T	HtmlHighlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	a
+,T	HtmlHighlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	c
+,T	HtmlHighlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	v
+,T	HtmlHighlight.fs	/^: ,T \\ cccccc\/bl$/;"	d
+,T	TermHighlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	a
+,T	TermHighlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	c
+,T	TermHighlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	v
+,T	TermHighlight.fs	/^: ,T \\ cccccc\/bl$/;"	d
 .</SPAN>	Highlight.fs	/^: .<\/SPAN> $/;"	d
+.</SPAN>	HtmlHighlight.fs	/^: .<\/SPAN> $/;"	d
 .<PRE>	Highlight.fs	/^: .<PRE>$/;"	d
+.<PRE>	HtmlHighlight.fs	/^: .<PRE>$/;"	d
 .<SPAN>	Highlight.fs	/^: .<SPAN> ( col ? -- )$/;"	d
+.<SPAN>	HtmlHighlight.fs	/^: .<SPAN> ( col ? -- )$/;"	d
 .>TOKEN	Highlight.fs	/^: .>TOKEN ( -- # c )$/;"	d
+.>TOKEN	HtmlHighlight.fs	/^: .>TOKEN ( -- # c )$/;"	d
+.>TOKEN	TermHighlight.fs	/^: .>TOKEN ( -- # c )$/;"	d
+.DUMP	TermTests.fs	/^: .DUMP$/;"	d
 .DUMP	Tests.fs	/^: .DUMP$/;"	d
 .HEXBYTE	Highlight.fs	/^: .HEXBYTE ( c -- )$/;"	d
+.HEXBYTE	HtmlHighlight.fs	/^: .HEXBYTE ( c -- )$/;"	d
 .HEXDIGIT	Highlight.fs	/^: .HEXDIGIT ( n -- )$/;"	d
+.HEXDIGIT	HtmlHighlight.fs	/^: .HEXDIGIT ( n -- )$/;"	d
+.OUTPUT	TermTests.fs	/^: .OUTPUT ( addr # -- )$/;"	d
 .OUTPUT	Tests.fs	/^: .OUTPUT ( addr # -- )$/;"	d
 .RGB-COLOR	Highlight.fs	/^: .RGB-COLOR ( n -- )$/;"	d
+.RGB-COLOR	HtmlHighlight.fs	/^: .RGB-COLOR ( n -- )$/;"	d
 .RUN-COMMENT	Highlight.fs	/^: .RUN-COMMENT$/;"	d
+.RUN-COMMENT	HtmlHighlight.fs	/^: .RUN-COMMENT$/;"	d
+.RUN-COMMENT	TermHighlight.fs	/^: .RUN-COMMENT$/;"	d
 .RUN-LINE-COMMENT	Highlight.fs	/^: .RUN-LINE-COMMENT$/;"	d
+.RUN-LINE-COMMENT	HtmlHighlight.fs	/^: .RUN-LINE-COMMENT$/;"	d
+.RUN-LINE-COMMENT	TermHighlight.fs	/^: .RUN-LINE-COMMENT$/;"	d
 .RUN-STRING	Highlight.fs	/^: .RUN-STRING$/;"	d
+.RUN-STRING	HtmlHighlight.fs	/^: .RUN-STRING$/;"	d
+.RUN-STRING	TermHighlight.fs	/^: .RUN-STRING$/;"	d
 .SKIP-COMMENT	Highlight.fs	/^: .SKIP-COMMENT$/;"	d
+.SKIP-COMMENT	HtmlHighlight.fs	/^: .SKIP-COMMENT$/;"	d
+.SKIP-COMMENT	TermHighlight.fs	/^: .SKIP-COMMENT$/;"	d
 .SKIP-LINE	Highlight.fs	/^: .SKIP-LINE$/;"	d
+.SKIP-LINE	HtmlHighlight.fs	/^: .SKIP-LINE$/;"	d
+.SKIP-LINE	TermHighlight.fs	/^: .SKIP-LINE$/;"	d
 .SKIP-SPACE	Highlight.fs	/^: .SKIP-SPACE ( -- c )$/;"	d
+.SKIP-SPACE	HtmlHighlight.fs	/^: .SKIP-SPACE ( -- c )$/;"	d
+.SKIP-SPACE	TermHighlight.fs	/^: .SKIP-SPACE ( -- c )$/;"	d
 .SKIP-STRING	Highlight.fs	/^: .SKIP-STRING$/;"	d
+.SKIP-STRING	HtmlHighlight.fs	/^: .SKIP-STRING$/;"	d
+.SKIP-STRING	TermHighlight.fs	/^: .SKIP-STRING$/;"	d
 .SOURCE	Highlight.fs	/^: .SOURCE$/;"	d
+.SOURCE	HtmlHighlight.fs	/^: .SOURCE$/;"	d
+.SOURCE	TermHighlight.fs	/^: .SOURCE$/;"	d
 .TOKEN	Highlight.fs	/^: .TOKEN ( addr # -- )$/;"	d
+.TOKEN	HtmlHighlight.fs	/^: .TOKEN ( addr # -- )$/;"	d
+.TOKEN	TermHighlight.fs	/^: .TOKEN ( addr # -- )$/;"	d
 0	Highlight.fs	/^    CREATE 0 , ;$/;"	a
+0	HtmlHighlight.fs	/^    CREATE 0 , ;$/;"	a
+0	TermHighlight.fs	/^    CREATE 0 , ;$/;"	a
 >HEX-NUMBER	Highlight.fs	/^: >HEX-NUMBER ( addr # -- u )$/;"	d
+>HEX-NUMBER	HtmlHighlight.fs	/^: >HEX-NUMBER ( addr # -- u )$/;"	d
+>HEX-NUMBER	TermHighlight.fs	/^: >HEX-NUMBER ( addr # -- u )$/;"	d
+?OUTPUT	TermTests.fs	/^: ?OUTPUT ( addr # -- ? )$/;"	d
 ?OUTPUT	Tests.fs	/^: ?OUTPUT ( addr # -- ? )$/;"	d
 ?_EMIT	Highlight.fs	/^: ?_EMIT ( c -- )$/;"	d
+?_EMIT	HtmlHighlight.fs	/^: ?_EMIT ( c -- )$/;"	d
+?_EMIT	TermHighlight.fs	/^: ?_EMIT ( c -- )$/;"	d
 ANSI-COLOR	Highlight.fs	/^: ANSI-COLOR ( c -- )$/;"	d
+ANSI-COLOR	HtmlHighlight.fs	/^: ANSI-COLOR ( c -- )$/;"	d
+ANSI-COLOR	TermHighlight.fs	/^: ANSI-COLOR ( c -- )$/;"	d
 ANSI-NORMAL	Highlight.fs	/^: ANSI-NORMAL$/;"	d
+ANSI-NORMAL	HtmlHighlight.fs	/^: ANSI-NORMAL$/;"	d
+ANSI-NORMAL	TermHighlight.fs	/^: ANSI-NORMAL$/;"	d
 BOLD	Highlight.fs	/^VARIABLE BOLD$/;"	v
+BOLD	HtmlHighlight.fs	/^VARIABLE BOLD$/;"	v
 CATEGORY	Highlight.fs	/^VARIABLE CATEGORY$/;"	v
+CATEGORY	HtmlHighlight.fs	/^VARIABLE CATEGORY$/;"	v
+CATEGORY	TermHighlight.fs	/^VARIABLE CATEGORY$/;"	v
 CATEGORY>COLOR	Highlight.fs	/^: CATEGORY>COLOR ( n -- n )$/;"	d
+CATEGORY>COLOR	HtmlHighlight.fs	/^: CATEGORY>COLOR ( n -- n )$/;"	d
+CATEGORY>COLOR	TermHighlight.fs	/^: CATEGORY>COLOR ( n -- n )$/;"	d
 COLORS	Highlight.fs	/^CREATE COLORS$/;"	a
+COLORS	HtmlHighlight.fs	/^CREATE COLORS$/;"	a
+COLORS	TermHighlight.fs	/^CREATE COLORS$/;"	a
 COMMENT	Highlight.fs	/^VARIABLE COMMENT$/;"	v
+COMMENT	HtmlHighlight.fs	/^VARIABLE COMMENT$/;"	v
+COMMENT	TermHighlight.fs	/^VARIABLE COMMENT$/;"	v
 DEFINE-COLOR	Highlight.fs	/^: DEFINE-COLOR$/;"	d
+DEFINE-COLOR	HtmlHighlight.fs	/^: DEFINE-COLOR$/;"	d
 DEFINING	Highlight.fs	/^VARIABLE DEFINING$/;"	v
+DEFINING	HtmlHighlight.fs	/^VARIABLE DEFINING$/;"	v
+DEFINING	TermHighlight.fs	/^VARIABLE DEFINING$/;"	v
+EMIT>!	TermTests.fs	/^: EMIT>! ( c -- )$/;"	d
 EMIT>!	Tests.fs	/^: EMIT>! ( c -- )$/;"	d
 FIND-LINK	Highlight.fs	/^: FIND-LINK ( list addr # -- link|0 )$/;"	d
+FIND-LINK	HtmlHighlight.fs	/^: FIND-LINK ( list addr # -- link|0 )$/;"	d
+FIND-LINK	TermHighlight.fs	/^: FIND-LINK ( list addr # -- link|0 )$/;"	d
 HTML	Highlight.fs	/^VARIABLE HTML$/;"	v
+HTML	HtmlHighlight.fs	/^VARIABLE HTML$/;"	v
 HTML-COLOR	Highlight.fs	/^: HTML-COLOR ( col -- )$/;"	d
+HTML-COLOR	HtmlHighlight.fs	/^: HTML-COLOR ( col -- )$/;"	d
 IS-SPACE?	Highlight.fs	/^: IS-SPACE? ( c -- ? )$/;"	d
+IS-SPACE?	HtmlHighlight.fs	/^: IS-SPACE? ( c -- ? )$/;"	d
+IS-SPACE?	TermHighlight.fs	/^: IS-SPACE? ( c -- ? )$/;"	d
+KEY<@	TermTests.fs	/^: KEY<@ ( -- c )$/;"	d
 KEY<@	Tests.fs	/^: KEY<@ ( -- c )$/;"	d
 LINE-COMMENT	Highlight.fs	/^VARIABLE LINE-COMMENT$/;"	v
+LINE-COMMENT	HtmlHighlight.fs	/^VARIABLE LINE-COMMENT$/;"	v
+LINE-COMMENT	TermHighlight.fs	/^VARIABLE LINE-COMMENT$/;"	v
 LINK,	Highlight.fs	/^: LINK, ( list addr # n -- )$/;"	d
+LINK,	HtmlHighlight.fs	/^: LINK, ( list addr # n -- )$/;"	d
+LINK,	TermHighlight.fs	/^: LINK, ( list addr # n -- )$/;"	d
 LINK>LINK	Highlight.fs	/^: LINK>LINK ( list -- link )$/;"	d
+LINK>LINK	HtmlHighlight.fs	/^: LINK>LINK ( list -- link )$/;"	d
+LINK>LINK	TermHighlight.fs	/^: LINK>LINK ( list -- link )$/;"	d
 LINK>NAME	Highlight.fs	/^: LINK>NAME ( link -- addr )$/;"	d
+LINK>NAME	HtmlHighlight.fs	/^: LINK>NAME ( link -- addr )$/;"	d
+LINK>NAME	TermHighlight.fs	/^: LINK>NAME ( link -- addr )$/;"	d
 LINK>VALUE	Highlight.fs	/^: LINK>VALUE ( link -- n )$/;"	d
+LINK>VALUE	HtmlHighlight.fs	/^: LINK>VALUE ( link -- n )$/;"	d
+LINK>VALUE	TermHighlight.fs	/^: LINK>VALUE ( link -- n )$/;"	d
 LINKED-LIST	Highlight.fs	/^: LINKED-LIST \\ name --$/;"	d
+LINKED-LIST	HtmlHighlight.fs	/^: LINKED-LIST \\ name --$/;"	d
+LINKED-LIST	TermHighlight.fs	/^: LINKED-LIST \\ name --$/;"	d
 NO-OP	Highlight.fs	/^: NO-OP ;$/;"	d
+NO-OP	HtmlHighlight.fs	/^: NO-OP ;$/;"	d
+NO-OP	TermHighlight.fs	/^: NO-OP ;$/;"	d
 NORMAL	Highlight.fs	/^: NORMAL$/;"	d
+NORMAL	HtmlHighlight.fs	/^: NORMAL$/;"	d
+NORMAL	TermHighlight.fs	/^: NORMAL$/;"	d
 PRE-BACKGROUND	Highlight.fs	/^VARIABLE PRE-BACKGROUND$/;"	v
+PRE-BACKGROUND	HtmlHighlight.fs	/^VARIABLE PRE-BACKGROUND$/;"	v
 PRE-COLOR	Highlight.fs	/^VARIABLE PRE-COLOR$/;"	v
+PRE-COLOR	HtmlHighlight.fs	/^VARIABLE PRE-COLOR$/;"	v
 READ-ARG	Highlight.fs	/^: READ-ARG ( addr # -- )$/;"	d
+READ-ARG	HtmlHighlight.fs	/^: READ-ARG ( addr # -- )$/;"	d
+READ-ARG	TermHighlight.fs	/^: READ-ARG ( addr # -- )$/;"	d
 READ-ARGS	Highlight.fs	/^: READ-ARGS$/;"	d
+READ-ARGS	HtmlHighlight.fs	/^: READ-ARGS$/;"	d
+READ-ARGS	TermHighlight.fs	/^: READ-ARGS$/;"	d
 READ-COLOR-ARG	Highlight.fs	/^: READ-COLOR-ARG ( addr # -- )$/;"	d
+READ-COLOR-ARG	HtmlHighlight.fs	/^: READ-COLOR-ARG ( addr # -- )$/;"	d
+READ-COLOR-ARG	TermHighlight.fs	/^: READ-COLOR-ARG ( addr # -- )$/;"	d
+RESET-OUTPUT	TermTests.fs	/^: RESET-OUTPUT$/;"	d
 RESET-OUTPUT	Tests.fs	/^: RESET-OUTPUT$/;"	d
 RGB-COLORS	Highlight.fs	/^CREATE RGB-COLORS$/;"	a
+RGB-COLORS	HtmlHighlight.fs	/^CREATE RGB-COLORS$/;"	a
+RGB-COLORS	TermHighlight.fs	/^CREATE RGB-COLORS$/;"	a
+SET-INPUT	TermTests.fs	/^: SET-INPUT ( addr # -- )$/;"	d
 SET-INPUT	Tests.fs	/^: SET-INPUT ( addr # -- )$/;"	d
 SET-RGB-COLOR	Highlight.fs	/^: SET-RGB-COLOR ( col cat -- )$/;"	d
+SET-RGB-COLOR	HtmlHighlight.fs	/^: SET-RGB-COLOR ( col cat -- )$/;"	d
+SET-RGB-COLOR	TermHighlight.fs	/^: SET-RGB-COLOR ( col cat -- )$/;"	d
 SOURCE-BEGIN	Highlight.fs	/^: SOURCE-BEGIN$/;"	d
+SOURCE-BEGIN	HtmlHighlight.fs	/^: SOURCE-BEGIN$/;"	d
 SOURCE-END	Highlight.fs	/^: SOURCE-END$/;"	d
+SOURCE-END	HtmlHighlight.fs	/^: SOURCE-END$/;"	d
 SPLIT-ARG	Highlight.fs	/^: SPLIT-ARG ( addr # -- pos )$/;"	d
+SPLIT-ARG	HtmlHighlight.fs	/^: SPLIT-ARG ( addr # -- pos )$/;"	d
+SPLIT-ARG	TermHighlight.fs	/^: SPLIT-ARG ( addr # -- pos )$/;"	d
 STAR	sample.fs	/^: STAR $/;"	d
 START-CATEGORY	Highlight.fs	/^: START-CATEGORY ( cat -- )$/;"	d
+START-CATEGORY	HtmlHighlight.fs	/^: START-CATEGORY ( cat -- )$/;"	d
+START-CATEGORY	TermHighlight.fs	/^: START-CATEGORY ( cat -- )$/;"	d
 START-COMMENT	Highlight.fs	/^: START-COMMENT$/;"	d
+START-COMMENT	HtmlHighlight.fs	/^: START-COMMENT$/;"	d
+START-COMMENT	TermHighlight.fs	/^: START-COMMENT$/;"	d
 START-DEFINING	Highlight.fs	/^: START-DEFINING$/;"	d
+START-DEFINING	HtmlHighlight.fs	/^: START-DEFINING$/;"	d
+START-DEFINING	TermHighlight.fs	/^: START-DEFINING$/;"	d
 START-LINE-COMMENT	Highlight.fs	/^: START-LINE-COMMENT$/;"	d
+START-LINE-COMMENT	HtmlHighlight.fs	/^: START-LINE-COMMENT$/;"	d
+START-LINE-COMMENT	TermHighlight.fs	/^: START-LINE-COMMENT$/;"	d
 START-STRING	Highlight.fs	/^: START-STRING$/;"	d
+START-STRING	HtmlHighlight.fs	/^: START-STRING$/;"	d
+START-STRING	TermHighlight.fs	/^: START-STRING$/;"	d
 STARTING	Highlight.fs	/^CREATE STARTING$/;"	a
+STARTING	HtmlHighlight.fs	/^CREATE STARTING$/;"	a
+STARTING	TermHighlight.fs	/^CREATE STARTING$/;"	a
 STRING	Highlight.fs	/^VARIABLE STRING$/;"	v
+STRING	HtmlHighlight.fs	/^VARIABLE STRING$/;"	v
+STRING	TermHighlight.fs	/^VARIABLE STRING$/;"	v
+TESTING	TermTests.fs	/^1 CONSTANT TESTING$/;"	c
 TESTING	Tests.fs	/^1 CONSTANT TESTING$/;"	c
 TOKEN	Highlight.fs	/^CREATE TOKEN 1024 ALLOT$/;"	a
+TOKEN	HtmlHighlight.fs	/^CREATE TOKEN 1024 ALLOT$/;"	a
+TOKEN	TermHighlight.fs	/^CREATE TOKEN 1024 ALLOT$/;"	a
 TOKEN.	Highlight.fs	/^: TOKEN. $/;"	d
+TOKEN.	HtmlHighlight.fs	/^: TOKEN. $/;"	d
+TYPE>!	TermTests.fs	/^: TYPE>! ( addr # -- )$/;"	d
 TYPE>!	Tests.fs	/^: TYPE>! ( addr # -- )$/;"	d
+_#INPUT	TermTests.fs	/^VARIABLE _#INPUT$/;"	v
 _#INPUT	Tests.fs	/^VARIABLE _#INPUT$/;"	v
 _BASE	Highlight.fs	/^VARIABLE _BASE$/;"	v
+_BASE	HtmlHighlight.fs	/^VARIABLE _BASE$/;"	v
+_BASE	TermHighlight.fs	/^VARIABLE _BASE$/;"	v
+_INPUT	TermTests.fs	/^CREATE _INPUT  1024 ALLOT$/;"	a
 _INPUT	Tests.fs	/^CREATE _INPUT  1024 ALLOT$/;"	a
+_INPUT#	TermTests.fs	/^VARIABLE _INPUT#$/;"	v
 _INPUT#	Tests.fs	/^VARIABLE _INPUT#$/;"	v
+_OUTPUT	TermTests.fs	/^CREATE _OUTPUT 1024 ALLOT$/;"	a
 _OUTPUT	Tests.fs	/^CREATE _OUTPUT 1024 ALLOT$/;"	a
+_OUTPUT#	TermTests.fs	/^VARIABLE _OUTPUT#$/;"	v
 _OUTPUT#	Tests.fs	/^VARIABLE _OUTPUT#$/;"	v
 controls	Tests.fs	/^T{ ." BOLD variable controls boldness of font if HTML is on" CR$/;"	v
