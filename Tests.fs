@@ -209,7 +209,7 @@ T{ ." .SOURCE display line comments in their proper color" CR
     S\" \e[33mSWAP \e[35m\\ DUP + ELSE DROP" ?OUTPUT
 }T
 T{ ." .SOURCE display new definitions in their proper color" CR
-    S" : STAR 42 EMIT ; : STARS 0 DO STAR LOOP ; 10 STARS" SET-INPUT
+    S" : ETOILE 42 EMIT ; : ETOILES 0 DO STAR LOOP ; 10 ETOILES" SET-INPUT
     RESET-OUTPUT
     .SOURCE
     S\" \e[37m: \e[37mSTAR \e[32m42 \e[0mEMIT \e[0m; \e[37m: \e[37mSTARS \e[32m0 \e[31mDO \e[36mSTAR \e[31mLOOP \e[0m; \e[32m10 \e[36mSTARS" ?OUTPUT
@@ -267,6 +267,15 @@ T{ ." .SOURCE display html source code with colors" CR
     HEX 808000 DECIMAL $STACK SET-RGB-COLOR 
     HEX FF00FF DECIMAL $CONTROL SET-RGB-COLOR 
     .SOURCE
+    S\" <pre style=\"color:#0012c7;background:#00002a;\"><span style=\"color:#808000; font-weight:bold;\">SWAP</span> <span style=\"color:#0000ff; font-weight:bold;\">+</span> <span style=\"color:#ff00ff; font-weight:bold;\">IF</span> <span style=\"color:#808000; font-weight:bold;\">DROP</span> <span style=\"color:#ff00ff; font-weight:bold;\">THEN</span></pre>" ?OUTPUT 
+    S" : STAR 42 EMIT ; STAR" SET-INPUT
+    RESET-OUTPUT
+    HTML ON
+    BOLD ON
+    HEX 808000 DECIMAL $STACK SET-RGB-COLOR 
+    HEX FF00FF DECIMAL $CONTROL SET-RGB-COLOR 
+    .SOURCE
+    CR CR .OUTPUT CR CR
     S\" <pre style=\"color:#0012c7;background:#00002a;\"><span style=\"color:#808000; font-weight:bold;\">SWAP</span> <span style=\"color:#0000ff; font-weight:bold;\">+</span> <span style=\"color:#ff00ff; font-weight:bold;\">IF</span> <span style=\"color:#808000; font-weight:bold;\">DROP</span> <span style=\"color:#ff00ff; font-weight:bold;\">THEN</span></pre>" ?OUTPUT 
 }T
 
