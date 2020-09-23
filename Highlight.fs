@@ -1,7 +1,7 @@
 \ HighLight.fs provide syntax highlighting for forth programs
 
 VARIABLE HTML
-HTML OFF
+VARIABLE BOLD
 
 DEFER _EMIT
 DEFER _TYPE
@@ -209,7 +209,6 @@ DECIMAL
 
 VARIABLE PRE-COLOR
 VARIABLE PRE-BACKGROUND
-VARIABLE BOLD 
 
 HEX 
 000000 PRE-COLOR !
@@ -239,9 +238,14 @@ DECIMAL
 : .<SPAN> ( col ? -- )
     S\" <span style=\"color:" _TYPE SWAP .RGB-COLOR 
     S\" ;" _TYPE
-    IF S\"  font-weight:bold;" _TYPE THEN
+    IF   S\"  font-weight:bold;" _TYPE 
+    ELSE S\"  font-weight:normal;" _TYPE 
+    THEN
     S\" \">" _TYPE ;
 \ "
+
+: .</SPAN> 
+    S" </span>" _TYPE ;
 
 : HTML-COLOR ( col -- )
     BOLD @ .<SPAN> ;
@@ -258,12 +262,8 @@ VARIABLE DEFINING
         ['] ANSI-COLOR IS _COLOR
     THEN ;
 
-DEFINE-COLOR
-
 : TOKEN. 
-    HTML @ IF
-        S" </span>" _TYPE
-    THEN ;
+    HTML @ IF .</SPAN> THEN ;
 
 : NORMAL
     HTML @ 0= IF ANSI-NORMAL THEN ;
@@ -274,13 +274,39 @@ DEFINE-COLOR
 : SOURCE-END
     HTML @ IF S" </pre>" _TYPE THEN ;
 
+: START-STRING
+    STRING ON ;
+
+: START-COMMENT
+    COMMENT ON ;
+
+: START-LINE-COMMENT
+    LINE-COMMENT ON ;
+
+: START-DEFINING
+    DEFINING ON ;
+
+: NO-OP ;
+
+CREATE STARTING
+' NO-OP              , \  $NUMBER
+' START-STRING       , \  $STRING
+' START-COMMENT      , \  $COMMENT
+' START-LINE-COMMENT , \  $LCOMMENT
+' NO-OP              , \  $USERDEF
+' START-DEFINING     , \  $DEFINING
+' NO-OP              , \  $OPERATOR
+' NO-OP              , \  $CONTROL
+' NO-OP              , \  $STACK
+' NO-OP              , \  $MEMORY
+
+: START-CATEGORY ( cat -- )
+    CELLS STARTING + @ EXECUTE ;
+
 : .TOKEN ( addr # -- )
     2DUP TOKENS -ROT FIND-LINK ?DUP IF
         LINK>VALUE 
-        DUP $STRING = STRING !
-        DUP $COMMENT = COMMENT !
-        DUP $LCOMMENT = LINE-COMMENT !
-        DUP $DEFINING = DEFINING !
+        DUP START-CATEGORY 
         CATEGORY>COLOR _COLOR
     ELSE
         DEFINING @ IF
@@ -348,11 +374,16 @@ VARIABLE _BASE
     THEN ;
 
 : READ-ARG ( addr # -- )
-    2DUP S" HTML" COMPARE 0= IF 
-        TRUE HTML ! 
+    2DUP S" ANSI" COMPARE 0= IF 
+        HTML OFF 
         DEFINE-COLOR 
     ELSE
-        READ-COLOR-ARG
+        2DUP S" BOLD" COMPARE 0= IF 
+            BOLD ON
+            DEFINE-COLOR 
+        ELSE
+            READ-COLOR-ARG
+        THEN
     THEN ;
 
 : READ-ARGS
@@ -361,19 +392,16 @@ VARIABLE _BASE
     LOOP ;
 
 : .RUN-STRING
-    $STRING CATEGORY>COLOR _COLOR 
     .SKIP-STRING STRING OFF ;
 
 : .RUN-COMMENT
-    $COMMENT CATEGORY>COLOR _COLOR
     .SKIP-COMMENT COMMENT OFF ;
 
 : .RUN-LINE-COMMENT
-    $COMMENT CATEGORY>COLOR _COLOR
     .SKIP-LINE LINE-COMMENT OFF ;
 
+DEFINE-COLOR
 : .SOURCE
-    READ-ARGS
     SOURCE-BEGIN
     STRING OFF
     COMMENT OFF
@@ -400,5 +428,8 @@ S" USERDEF=006699" READ-COLOR-ARG
 S" CONTROL=663300" READ-COLOR-ARG
 S" OPERATOR=800000" READ-COLOR-ARG
 S" MEMORY=FF3300" READ-COLOR-ARG
-
+HTML ON
+BOLD OFF
+READ-ARGS
+DEFINE-COLOR
 .SOURCE BYE [THEN]

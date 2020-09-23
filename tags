@@ -18,6 +18,7 @@ $USERDEF	Highlight.fs	/^4 CONSTANT $USERDEF$/;"	c
 ,T	Highlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	c
 ,T	Highlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	v
 ,T	Highlight.fs	/^: ,T \\ cccccc\/bl$/;"	d
+.</SPAN>	Highlight.fs	/^: .<\/SPAN> $/;"	d
 .<PRE>	Highlight.fs	/^: .<PRE>$/;"	d
 .<SPAN>	Highlight.fs	/^: .<SPAN> ( col ? -- )$/;"	d
 .>TOKEN	Highlight.fs	/^: .>TOKEN ( -- # c )$/;"	d
@@ -41,7 +42,7 @@ $USERDEF	Highlight.fs	/^4 CONSTANT $USERDEF$/;"	c
 ?_EMIT	Highlight.fs	/^: ?_EMIT ( c -- )$/;"	d
 ANSI-COLOR	Highlight.fs	/^: ANSI-COLOR ( c -- )$/;"	d
 ANSI-NORMAL	Highlight.fs	/^: ANSI-NORMAL$/;"	d
-BOLD	Highlight.fs	/^VARIABLE BOLD $/;"	v
+BOLD	Highlight.fs	/^VARIABLE BOLD$/;"	v
 CATEGORY	Highlight.fs	/^VARIABLE CATEGORY$/;"	v
 CATEGORY>COLOR	Highlight.fs	/^: CATEGORY>COLOR ( n -- n )$/;"	d
 COLORS	Highlight.fs	/^CREATE COLORS$/;"	a
@@ -60,6 +61,7 @@ LINK>LINK	Highlight.fs	/^: LINK>LINK ( list -- link )$/;"	d
 LINK>NAME	Highlight.fs	/^: LINK>NAME ( link -- addr )$/;"	d
 LINK>VALUE	Highlight.fs	/^: LINK>VALUE ( link -- n )$/;"	d
 LINKED-LIST	Highlight.fs	/^: LINKED-LIST \\ name --$/;"	d
+NO-OP	Highlight.fs	/^: NO-OP ;$/;"	d
 NORMAL	Highlight.fs	/^: NORMAL$/;"	d
 PRE-BACKGROUND	Highlight.fs	/^VARIABLE PRE-BACKGROUND$/;"	v
 PRE-COLOR	Highlight.fs	/^VARIABLE PRE-COLOR$/;"	v
@@ -74,6 +76,12 @@ SOURCE-BEGIN	Highlight.fs	/^: SOURCE-BEGIN$/;"	d
 SOURCE-END	Highlight.fs	/^: SOURCE-END$/;"	d
 SPLIT-ARG	Highlight.fs	/^: SPLIT-ARG ( addr # -- pos )$/;"	d
 STAR	sample.fs	/^: STAR $/;"	d
+START-CATEGORY	Highlight.fs	/^: START-CATEGORY ( cat -- )$/;"	d
+START-COMMENT	Highlight.fs	/^: START-COMMENT$/;"	d
+START-DEFINING	Highlight.fs	/^: START-DEFINING$/;"	d
+START-LINE-COMMENT	Highlight.fs	/^: START-LINE-COMMENT$/;"	d
+START-STRING	Highlight.fs	/^: START-STRING$/;"	d
+STARTING	Highlight.fs	/^CREATE STARTING$/;"	a
 STRING	Highlight.fs	/^VARIABLE STRING$/;"	v
 TESTING	Tests.fs	/^1 CONSTANT TESTING$/;"	c
 TOKEN	Highlight.fs	/^CREATE TOKEN 1024 ALLOT$/;"	a
@@ -85,3 +93,4 @@ _INPUT	Tests.fs	/^CREATE _INPUT  1024 ALLOT$/;"	a
 _INPUT#	Tests.fs	/^VARIABLE _INPUT#$/;"	v
 _OUTPUT	Tests.fs	/^CREATE _OUTPUT 1024 ALLOT$/;"	a
 _OUTPUT#	Tests.fs	/^VARIABLE _OUTPUT#$/;"	v
+controls	Tests.fs	/^T{ ." BOLD variable controls boldness of font if HTML is on" CR$/;"	v

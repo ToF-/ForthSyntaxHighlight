@@ -234,7 +234,7 @@ T{ ." .<SPAN> display a span tag with a color and boldness switch" CR
 T{ ." .<SPAN> display a span tag with a color and boldness switch off" CR 
     RESET-OUTPUT
     4807 0 .<SPAN>
-    S\" <span style=\"color:#0012c7;\">" ?OUTPUT
+    S\" <span style=\"color:#0012c7; font-weight:normal;\">" ?OUTPUT
 }T
 T{ ." CATEGORY>COLOR value depends on HTML option " CR
     $COMMENT CATEGORY>COLOR 5 ?S
@@ -244,16 +244,26 @@ T{ ." CATEGORY>COLOR value depends on HTML option " CR
 }T
 T{ ." _COLOR changes the html color if HTML is on" CR
     TRUE HTML !
+    TRUE BOLD !
     DEFINE-COLOR
     RESET-OUTPUT
     $NUMBER CATEGORY>COLOR _COLOR 
     S\" <span style=\"color:#008000; font-weight:bold;\">" ?OUTPUT 
 }T
+T{ ." BOLD variable controls boldness of font if HTML is on" CR
+    TRUE HTML !
+    FALSE BOLD !
+    DEFINE-COLOR
+    RESET-OUTPUT
+    $NUMBER CATEGORY>COLOR _COLOR 
+    S\" <span style=\"color:#008000; font-weight:normal;\">" ?OUTPUT 
+}T
 
 T{ ." .SOURCE display html source code with colors" CR
     S" SWAP + IF DROP THEN" SET-INPUT
     RESET-OUTPUT
-    TRUE HTML !
+    HTML ON
+    BOLD ON
     HEX 808000 DECIMAL $STACK SET-RGB-COLOR 
     HEX FF00FF DECIMAL $CONTROL SET-RGB-COLOR 
     .SOURCE
