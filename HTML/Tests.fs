@@ -110,4 +110,41 @@ T{ ." SKIP-COMMENT. prints input chars until (and including) right parens or end
     SKIP-COMMENT.
     S\" foo\n bar)" ?OUTPUT
 }T
+T{ ." a LINKED-LIST starts with 0 as the first link " CR
+    LINKED-LIST FOO
+    FOO @ 0 ?S
+}T
+T{ ." ITEM, adds an item to a linked list in the dictionary" CR
+    FOO S" Bar" 4807 ITEM,
+    FOO @ ITEM>VALUE 4807 ?S
+    FOO @ ITEM>NAME COUNT S" Bar" STR= ?TRUE
+    FOO @ ITEM>NEXT 0 ?S
+}T
+T{ ." FIND-ITEM finds an item or returns 0" CR
+    FOO S" Qux" 42 ITEM,
+    FOO S" Bar" FIND-ITEM ITEM>VALUE 4807 ?S
+    FOO S" Qux" FIND-ITEM ITEM>VALUE 42 ?S
+    FOO S" Baz" FIND-ITEM 0 ?S
+}T
+T{ ." TOKENS include all forth standard words with their category " CR
+    TOKENS S" SWAP"   FIND-ITEM ITEM>VALUE $STACK ?S
+    TOKENS S" /MOD"   FIND-ITEM ITEM>VALUE $OPERATOR ?S
+    TOKENS S" UNUSED" FIND-ITEM ITEM>VALUE $MEMORY ?S
+    TOKENS S" CREATE" FIND-ITEM ITEM>VALUE $DEFINING ?S
+    TOKENS S" ENDIF"  FIND-ITEM ITEM>VALUE $CONTROL ?S
+    TOKENS S\" S\""   FIND-ITEM ITEM>VALUE $STRING ?S
+    TOKENS S\" .\""   FIND-ITEM ITEM>VALUE $STRING ?S
+    TOKENS S" ("      FIND-ITEM ITEM>VALUE $COMMENT ?S
+    TOKENS S" \"      FIND-ITEM ITEM>VALUE $LCOMMENT ?S
+}T
+T{ ." RGB-WEIGHT creates a value with color and font weight attributes" CR
+    42 17 23 TRUE RGBW-VALUE
+    DUP RGBW>COLOR HEX6 S" 2A1117" STR= ?TRUE
+    RGBW>FONT-WEIGHT ?TRUE
+}T
+T{ ." ATTRIBUTE stores the attributes for each category" CR
+    42 17 23 TRUE RGBW-VALUE $COMMENT ATTRIBUTES ! 
+    $COMMENT ATTRIBUTES @ RGBW>COLOR HEX6 S" 2A1117" STR= ?TRUE
+}T
+
 BYE
