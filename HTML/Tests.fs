@@ -143,8 +143,43 @@ T{ ." RGB-WEIGHT creates a value with color and font weight attributes" CR
     RGBW>FONT-WEIGHT ?TRUE
 }T
 T{ ." ATTRIBUTE stores the attributes for each category" CR
-    42 17 23 TRUE RGBW-VALUE $COMMENT ATTRIBUTES ! 
+    42 17 23 TRUE RGBW-VALUE $COMMENT ATTRIBUTES !
     $COMMENT ATTRIBUTES @ RGBW>COLOR HEX6 S" 2A1117" STR= ?TRUE
 }T
+T{ ." TOKEN. display a forth token with its attributes" CR
+    42 17 23 TRUE RGBW-VALUE $STACK ATTRIBUTES !
+    RESET-OUTPUT
+    S" SWAP" TOKEN. 
+    S\" <span style=\"color:#2A1117; font-weight:bold;\">SWAP</span>" ?OUTPUT
+}T
+T{ ." TOKEN. display a number with number attributes" CR
+    48 07 23 FALSE RGBW-VALUE $NUMBER ATTRIBUTES !
+    RESET-OUTPUT
+    S" 42" TOKEN. 
+    S\" <span style=\"color:#300717; font-weight:normal;\">42</span>" ?OUTPUT
+}T
+T{ ." TOKEN. display an uncategorized forth word  with default attributes" CR
+    23 01 65 FALSE RGBW-VALUE $DEFAULT ATTRIBUTES !
+    RESET-OUTPUT
+    S" EMIT" TOKEN. 
+    S\" <span style=\"color:#170141; font-weight:normal;\">EMIT</span>" ?OUTPUT
+}T
+T{ ." TOKEN. display a user defined word with user def attributes" CR
+    240 240 240 FALSE RGBW-VALUE $USERDEF ATTRIBUTES !
+    RESET-OUTPUT
+    DEFINING ON
+    S" FOO" TOKEN. 
+    S\" <span style=\"color:#F0F0F0; font-weight:normal;\">FOO</span>" ?OUTPUT
+}T
+T{ ." After displaying a defining word, the next word is in user def attributes" CR
+    2 2 2 TRUE  RGBW-VALUE $DEFINING ATTRIBUTES !
+    1 1 1 FALSE RGBW-VALUE $USERDEF ATTRIBUTES !
+    DEFINING OFF
+    RESET-OUTPUT
+    S" :" TOKEN.
+    S\" <span style=\"color:#020202; font-weight:bold;\">:</span>" ?OUTPUT
+    RESET-OUTPUT
+    S" STAR" TOKEN.
+    S\" <span style=\"color:#010101; font-weight:normal;\">STAR</span>" ?OUTPUT
 
 BYE
