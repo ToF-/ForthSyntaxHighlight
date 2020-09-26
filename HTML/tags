@@ -15,13 +15,13 @@ $OPERATOR	HTMLHighlight.fs	/^ 6 CONSTANT $OPERATOR$/;"	c
 $STACK	HTMLHighlight.fs	/^ 8 CONSTANT $STACK$/;"	c
 $STRING	HTMLHighlight.fs	/^ 1 CONSTANT $STRING$/;"	c
 $USERDEF	HTMLHighlight.fs	/^ 4 CONSTANT $USERDEF$/;"	c
+%TOKEN	HTMLHighlight.fs	/^1024 CONSTANT %TOKEN$/;"	c
 (TOKEN.)	HTMLHighlight.fs	/^: (TOKEN.) ( addr # -- )$/;"	d
-,T	HTMLHighlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	a
-,T	HTMLHighlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	c
-,T	HTMLHighlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	v
+,T	HTMLHighlight.fs	/^,T :         ,T CREATE     ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	a
+,T	HTMLHighlight.fs	/^,T :         ,T CREATE     ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	c
+,T	HTMLHighlight.fs	/^,T :         ,T CREATE     ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	v
 ,T	HTMLHighlight.fs	/^: ,T \\ cccccc\/bl$/;"	d
 .DUMP	Tests.fs	/^: .DUMP$/;"	d
-.OUTPUT	Tests.fs	/^: .OUTPUT ( addr # -- )$/;"	d
 0	HTMLHighlight.fs	/^    CREATE 0 , ;$/;"	a
 </PRE>.	HTMLHighlight.fs	/^: <\/PRE>.$/;"	d
 </SPAN>.	HTMLHighlight.fs	/^: <\/SPAN>.$/;"	d
@@ -32,9 +32,13 @@ $USERDEF	HTMLHighlight.fs	/^ 4 CONSTANT $USERDEF$/;"	c
 ?_EMIT	HTMLHighlight.fs	/^: ?_EMIT ( c -- )$/;"	d
 ADD-TOKEN	HTMLHighlight.fs	/^: ADD-TOKEN ( addr # -- )$/;"	d
 ATTRIBUTES	HTMLHighlight.fs	/^CREATE ATTRIBUTES 10 CELLS ALLOT$/;"	a
+BACKGROUND	HTMLHighlight.fs	/^VARIABLE BACKGROUND$/;"	v
 C>UPPER	HTMLHighlight.fs	/^: C>UPPER ( c -- c )$/;"	d
 CATEGORY	HTMLHighlight.fs	/^VARIABLE CATEGORY$/;"	v
 CHAIN-LINK	HTMLHighlight.fs	/^: CHAIN-LINK ( list -- )$/;"	d
+COLOR	HTMLHighlight.fs	/^VARIABLE COLOR$/;"	v
+COMMENT	HTMLHighlight.fs	/^VARIABLE COMMENT$/;"	v
+COMMENT.	HTMLHighlight.fs	/^: COMMENT.$/;"	d
 CR%	HTMLHighlight.fs	/^13 CONSTANT CR%$/;"	c
 DEFINING	HTMLHighlight.fs	/^VARIABLE DEFINING$/;"	v
 EMIT>!	Tests.fs	/^: EMIT>! ( c -- )$/;"	d
@@ -47,9 +51,11 @@ ITEM>NAME	HTMLHighlight.fs	/^: ITEM>NAME  ( addr -- str )$/;"	d
 ITEM>NEXT	HTMLHighlight.fs	/^: ITEM>NEXT ( addr -- link )$/;"	d
 ITEM>VALUE	HTMLHighlight.fs	/^: ITEM>VALUE ( addr -- item )$/;"	d
 KEY<@	Tests.fs	/^: KEY<@ ( -- c )$/;"	d
-LINKED-LIST	HTMLHighlight.fs	/^: LINKED-LIST \\ name $/;"	d
+LINKED-LIST	HTMLHighlight.fs	/^: LINKED-LIST \\ name$/;"	d
 NL	HTMLHighlight.fs	/^10 CONSTANT NL$/;"	c
+OUTPUT.	Tests.fs	/^: OUTPUT. ( addr # -- )$/;"	d
 RESET-OUTPUT	Tests.fs	/^: RESET-OUTPUT$/;"	d
+RGB	HTMLHighlight.fs	/^: RGB ( r g b -- v )$/;"	d
 RGBW-VALUE	HTMLHighlight.fs	/^: RGBW-VALUE ( r g b ? -- )$/;"	d
 RGBW>COLOR	HTMLHighlight.fs	/^: RGBW>COLOR ( n -- rgb )$/;"	d
 RGBW>FONT-WEIGHT	HTMLHighlight.fs	/^: RGBW>FONT-WEIGHT ( n -- ? )$/;"	d
@@ -58,13 +64,20 @@ SKIP-COMMENT.	HTMLHighlight.fs	/^: SKIP-COMMENT.$/;"	d
 SKIP-LINE.	HTMLHighlight.fs	/^: SKIP-LINE.$/;"	d
 SKIP-SPACE.	HTMLHighlight.fs	/^: SKIP-SPACE. ( -- c )$/;"	d
 SKIP-STRING.	HTMLHighlight.fs	/^: SKIP-STRING.$/;"	d
+SOURCE.	HTMLHighlight.fs	/^: SOURCE.$/;"	d
 SPAN.	HTMLHighlight.fs	/^: SPAN. ( addr # attr -- )$/;"	d
-STAR	sample.fs	/^: STAR $/;"	d
+STAR	sample.fs	/^: STAR ( this is a comment ) $/;"	d
+STRING	HTMLHighlight.fs	/^VARIABLE STRING$/;"	v
+STRING.	HTMLHighlight.fs	/^: STRING.$/;"	d
 TAB	HTMLHighlight.fs	/^ 9 CONSTANT TAB$/;"	c
 TESTING	Tests.fs	/^TRUE CONSTANT TESTING$/;"	c
+TOKEN	HTMLHighlight.fs	/^CREATE TOKEN %TOKEN ALLOT$/;"	a
 TOKEN.	HTMLHighlight.fs	/^: TOKEN. ( addr # -- )$/;"	d
+TOKEN<.	HTMLHighlight.fs	/^: TOKEN<. ( -- # c )$/;"	d
 TYPE>!	Tests.fs	/^: TYPE>! ( addr # -- )$/;"	d
+VALUE>RGBW	HTMLHighlight.fs	/^: VALUE>RGBW ( n -- col ? )$/;"	d
 _#INPUT	Tests.fs	/^VARIABLE _#INPUT$/;"	v
+_?EMIT	HTMLHighlight.fs	/^: _?EMIT ( c -- )$/;"	d
 _INPUT	Tests.fs	/^CREATE _INPUT  1024 ALLOT$/;"	a
 _INPUT#	Tests.fs	/^VARIABLE _INPUT#$/;"	v
 _OUTPUT	Tests.fs	/^CREATE _OUTPUT 1024 ALLOT$/;"	a

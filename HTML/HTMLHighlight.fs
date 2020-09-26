@@ -238,7 +238,7 @@ CREATE ATTRIBUTES 10 CELLS ALLOT
 VARIABLE DEFINING
 VARIABLE STRING
 VARIABLE COMMENT
-
+VARIABLE LCOMMENT
 
 \ display a span element with attributes
 : SPAN. ( addr # attr -- )
@@ -262,6 +262,7 @@ VARIABLE COMMENT
         DUP $DEFINING = DEFINING !
         DUP $STRING   = STRING   !
         DUP $COMMENT  = COMMENT  !
+        DUP $LCOMMENT = LCOMMENT !
     ELSE
         2DUP FIND-NAME IF $DEFAULT ELSE $NUMBER THEN
     THEN
@@ -305,6 +306,12 @@ VARIABLE BACKGROUND
     VALUE>RGBW <SPAN>.
     SKIP-COMMENT. </SPAN>. ;
 
+\ display a comment line with the comment line attributes
+: LCOMMENT.
+    $LCOMMENT ATTRIBUTES @
+    VALUE>RGBW <SPAN>.
+    SKIP-LINE. </SPAN>. ;
+
 \ display forth source code with syntax highlighting
 : SOURCE.
     COLOR @ BACKGROUND @ <PRE>.
@@ -312,8 +319,9 @@ VARIABLE BACKGROUND
     STRING   OFF
     COMMENT  OFF
     BEGIN
-        STRING  @ IF STRING. STRING OFF THEN
-        COMMENT @ IF COMMENT. COMMENT OFF THEN
+        STRING   @ IF STRING.   STRING OFF   THEN
+        COMMENT  @ IF COMMENT.  COMMENT OFF  THEN
+        LCOMMENT @ IF LCOMMENT. LCOMMENT OFF THEN
         TOKEN<. OVER WHILE
         SWAP TOKEN SWAP 
         TOKEN.

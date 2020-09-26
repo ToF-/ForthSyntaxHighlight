@@ -233,4 +233,17 @@ T{ ." SOURCE. doesn't apply colors for words inside a comment" CR
     S\" <pre style=\"color:#010203;background:#F0F0F0;\"><span style=\"color:#808000; font-weight:bold;\">SWAP</span> <span style=\"color:#FF0080; font-weight:bold;\">(</span> <span style=\"color:#FF0080; font-weight:bold;\">IF DROP THEN )</span> <span style=\"color:#800080; font-weight:bold;\">+</span></pre>"
     ?OUTPUT
  }T
+T{ ." SOURCE. doesn't apply colors for a line comment" CR
+      1   2   3 RGB COLOR !
+    240 240 240 RGB BACKGROUND !
+    128 128 0   TRUE RGBW-VALUE $STACK    ATTRIBUTES !
+    128   0 128 TRUE RGBW-VALUE $OPERATOR ATTRIBUTES !
+    128 128 128 TRUE RGBW-VALUE $CONTROL  ATTRIBUTES !
+    255   0 128 TRUE RGBW-VALUE $COMMENT  ATTRIBUTES !
+    255   0 128 TRUE RGBW-VALUE $LCOMMENT ATTRIBUTES !
+    RESET-OUTPUT
+    S\" SWAP \\ IF DROP THEN +" SET-INPUT
+    SOURCE.
+    S\" <pre style=\"color:#010203;background:#F0F0F0;\"><span style=\"color:#808000; font-weight:bold;\">SWAP</span> <span style=\"color:#FF0080; font-weight:bold;\">\\</span> <span style=\"color:#FF0080; font-weight:bold;\">IF DROP THEN +</span></pre>"
+    ?OUTPUT
 BYE
