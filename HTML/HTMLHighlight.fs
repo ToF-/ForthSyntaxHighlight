@@ -21,8 +21,8 @@ DEFER _KEY
 
 \ emit a char to html, escaping < and >
 : EMIT-HTML ( c -- c )
-    DUP [CHAR] < = IF DROP S" &lt" _TYPE 
-    ELSE DUP [CHAR] > = IF DROP S" &gt" _TYPE
+    DUP [CHAR] < = IF DROP S" &lt;" _TYPE 
+    ELSE DUP [CHAR] > = IF DROP S" &gt;" _TYPE
     ELSE _EMIT THEN THEN ;
 
 \ type a string to html, escaping < and >
