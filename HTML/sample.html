@@ -1,8 +1,86 @@
-<pre style="color:#000000;background:#F2F2F2;"><span style="color:#669999; font-weight:bold;">\</span> <span style="color:#669999; font-weight:bold;">this is a line comment &ltsample.dat
-</span><span style="color:#F07F00; font-weight:bold;">VARIABLE</span> <span style="color:#336699; font-weight:bold;">FOO</span>
-<span style="color:#008000; font-weight:bold;">."</span> <span style="color:#008000; font-weight:bold;">I am going to define a word"</span> <span style="color:#000000; font-weight:normal;">CR</span>
-<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">STAR</span> <span style="color:#669999; font-weight:bold;">(</span> <span style="color:#669999; font-weight:bold;">this is a comment )</span> 
-    <span style="color:#800000; font-weight:bold;">42</span> <span style="color:#000000; font-weight:normal;">EMIT</span> <span style="color:#993300; font-weight:bold;">;</span>
-<span style="color:#800000; font-weight:bold;">3</span> <span style="color:#800000; font-weight:bold;">4</span> <span style="color:#800000; font-weight:bold;">&</span> <span style="color:#800000; font-weight:bold;">&ltBUFFER&gt</span>
-<span style="color:#CC6600; font-weight:bold;">.</span> <span style="color:#336699; font-weight:bold;">STAR</span> <span style="color:#000000; font-weight:normal;">BYE</span>
+<pre style="color:#000000;background:#F2F2F2;"><span style="color:#669999; font-weight:bold;">\</span> <span style="color:#669999; font-weight:bold;">Bowling.fs          gforth Bowling.fs &ltinput.dat
+</span><span style="color:#F07F00; font-weight:bold;">VARIABLE</span> <span style="color:#336699; font-weight:bold;">SCORE</span>
+<span style="color:#F07F00; font-weight:bold;">VARIABLE</span> <span style="color:#336699; font-weight:bold;">BONUS</span>
+<span style="color:#F07F00; font-weight:bold;">VARIABLE</span> <span style="color:#336699; font-weight:bold;">FRAME#</span>
+<span style="color:#F07F00; font-weight:bold;">VARIABLE</span> <span style="color:#336699; font-weight:bold;">FRAME</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">START</span>
+    <span style="color:#800000; font-weight:bold;">0</span> <span style="color:#336699; font-weight:bold;">SCORE</span> <span style="color:#CC3300; font-weight:bold;">!</span>
+    <span style="color:#800000; font-weight:bold;">0</span> <span style="color:#336699; font-weight:bold;">BONUS</span> <span style="color:#CC3300; font-weight:bold;">!</span>
+    <span style="color:#800000; font-weight:bold;">0</span> <span style="color:#336699; font-weight:bold;">FRAME#</span> <span style="color:#CC3300; font-weight:bold;">!</span>
+    <span style="color:#800000; font-weight:bold;">0</span> <span style="color:#336699; font-weight:bold;">FRAME</span> <span style="color:#CC3300; font-weight:bold;">!</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">SPARE</span> <span style="color:#669999; font-weight:bold;">\</span> <span style="color:#669999; font-weight:bold;">set the bonus to 1, no supplement
+</span>    <span style="color:#800000; font-weight:bold;">1</span> <span style="color:#336699; font-weight:bold;">BONUS</span> <span style="color:#CC3300; font-weight:bold;">!</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">STRIKE</span> <span style="color:#669999; font-weight:bold;">\</span> <span style="color:#669999; font-weight:bold;">increase bonus, and set supplement to 1
+</span>    <span style="color:#336699; font-weight:bold;">BONUS</span> <span style="color:#CC3300; font-weight:bold;">@</span> <span style="color:#CC6600; font-weight:bold;">1+</span> <span style="color:#800000; font-weight:bold;">4</span> <span style="color:#CC6600; font-weight:bold;">OR</span> <span style="color:#336699; font-weight:bold;">BONUS</span> <span style="color:#CC3300; font-weight:bold;">!</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">BONUS&gt</span> <span style="color:#669999; font-weight:bold;">(</span> <span style="color:#669999; font-weight:bold;">-- n )</span> <span style="color:#669999; font-weight:bold;">\</span> <span style="color:#669999; font-weight:bold;">produce bonus factor, get supplement ready
+</span>    <span style="color:#336699; font-weight:bold;">BONUS</span> <span style="color:#CC3300; font-weight:bold;">@</span> <span style="color:#009999; font-weight:bold;">DUP</span> <span style="color:#800000; font-weight:bold;">3</span> <span style="color:#CC6600; font-weight:bold;">AND</span>
+    <span style="color:#009999; font-weight:bold;">SWAP</span> <span style="color:#CC6600; font-weight:bold;">2/</span> <span style="color:#CC6600; font-weight:bold;">2/</span> <span style="color:#336699; font-weight:bold;">BONUS</span> <span style="color:#CC3300; font-weight:bold;">!</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">COLLECT-BONUS</span> <span style="color:#669999; font-weight:bold;">(</span> <span style="color:#669999; font-weight:bold;">#pins -- )</span> <span style="color:#669999; font-weight:bold;">\</span> <span style="color:#669999; font-weight:bold;">add extra points to score and advance bonus
+</span>    <span style="color:#336699; font-weight:bold;">BONUS&gt</span> <span style="color:#CC6600; font-weight:bold;">*</span> <span style="color:#336699; font-weight:bold;">SCORE</span> <span style="color:#CC3300; font-weight:bold;">+!</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">FRAME#&gt</span> <span style="color:#669999; font-weight:bold;">\</span> <span style="color:#669999; font-weight:bold;">advance frame count
+</span>    <span style="color:#336699; font-weight:bold;">FRAME#</span> <span style="color:#CC3300; font-weight:bold;">@</span> <span style="color:#CC6600; font-weight:bold;">1+</span> <span style="color:#800000; font-weight:bold;">10</span> <span style="color:#CC6600; font-weight:bold;">MIN</span> <span style="color:#336699; font-weight:bold;">FRAME#</span> <span style="color:#CC3300; font-weight:bold;">!</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">OPEN-FRAME?</span> <span style="color:#669999; font-weight:bold;">(</span> <span style="color:#669999; font-weight:bold;">-- ? )</span>
+    <span style="color:#336699; font-weight:bold;">FRAME</span> <span style="color:#CC3300; font-weight:bold;">@</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">CLOSE-FRAME</span> <span style="color:#669999; font-weight:bold;">\</span> <span style="color:#669999; font-weight:bold;">close frame and increment frame count
+</span>    <span style="color:#800000; font-weight:bold;">0</span> <span style="color:#336699; font-weight:bold;">FRAME</span> <span style="color:#CC3300; font-weight:bold;">!</span> <span style="color:#336699; font-weight:bold;">FRAME#&gt</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">NEW-FRAME?</span> <span style="color:#669999; font-weight:bold;">(</span> <span style="color:#669999; font-weight:bold;">-- ? )</span>
+    <span style="color:#336699; font-weight:bold;">OPEN-FRAME?</span> <span style="color:#CC6600; font-weight:bold;">0=</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">OPEN-FRAME</span> <span style="color:#669999; font-weight:bold;">(</span> <span style="color:#669999; font-weight:bold;">#pins -- )</span> <span style="color:#669999; font-weight:bold;">\</span> <span style="color:#669999; font-weight:bold;">open frame, saving 1st roll value+1
+</span>    <span style="color:#CC6600; font-weight:bold;">1+</span> <span style="color:#336699; font-weight:bold;">FRAME</span> <span style="color:#CC3300; font-weight:bold;">!</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">LAST-ROLL</span> <span style="color:#669999; font-weight:bold;">(</span> <span style="color:#669999; font-weight:bold;">-- #pins )</span> <span style="color:#669999; font-weight:bold;">\</span> <span style="color:#669999; font-weight:bold;">retrieve the first roll value
+</span>    <span style="color:#336699; font-weight:bold;">FRAME</span> <span style="color:#CC3300; font-weight:bold;">@</span> <span style="color:#CC6600; font-weight:bold;">1-</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">CHECK-STRIKE</span> <span style="color:#669999; font-weight:bold;">(</span> <span style="color:#669999; font-weight:bold;">#pins -- )</span>
+    <span style="color:#009999; font-weight:bold;">DUP</span> <span style="color:#800000; font-weight:bold;">10</span> <span style="color:#CC6600; font-weight:bold;">=</span> <span style="color:#993300; font-weight:bold;">IF</span>
+        <span style="color:#009999; font-weight:bold;">DROP</span> <span style="color:#336699; font-weight:bold;">STRIKE</span> <span style="color:#336699; font-weight:bold;">CLOSE-FRAME</span>
+    <span style="color:#993300; font-weight:bold;">ELSE</span>
+        <span style="color:#336699; font-weight:bold;">OPEN-FRAME</span>
+    <span style="color:#993300; font-weight:bold;">THEN</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">CHECK-SPARE</span> <span style="color:#669999; font-weight:bold;">(</span> <span style="color:#669999; font-weight:bold;">#pins -- )</span>
+    <span style="color:#336699; font-weight:bold;">LAST-ROLL</span> <span style="color:#CC6600; font-weight:bold;">+</span> <span style="color:#800000; font-weight:bold;">10</span> <span style="color:#CC6600; font-weight:bold;">=</span> <span style="color:#993300; font-weight:bold;">IF</span> <span style="color:#336699; font-weight:bold;">SPARE</span> <span style="color:#993300; font-weight:bold;">THEN</span>
+    <span style="color:#336699; font-weight:bold;">CLOSE-FRAME</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">CHECK-BONUS</span> <span style="color:#669999; font-weight:bold;">(</span> <span style="color:#669999; font-weight:bold;">#pins -- )</span>
+    <span style="color:#336699; font-weight:bold;">NEW-FRAME?</span> <span style="color:#993300; font-weight:bold;">IF</span> <span style="color:#336699; font-weight:bold;">CHECK-STRIKE</span> <span style="color:#993300; font-weight:bold;">ELSE</span> <span style="color:#336699; font-weight:bold;">CHECK-SPARE</span> <span style="color:#993300; font-weight:bold;">THEN</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">ROLL+</span> <span style="color:#669999; font-weight:bold;">(</span> <span style="color:#669999; font-weight:bold;">#pins -- )</span>
+    <span style="color:#009999; font-weight:bold;">DUP</span> <span style="color:#336699; font-weight:bold;">COLLECT-BONUS</span>
+    <span style="color:#336699; font-weight:bold;">FRAME#</span> <span style="color:#CC3300; font-weight:bold;">@</span> <span style="color:#800000; font-weight:bold;">0</span> <span style="color:#800000; font-weight:bold;">10</span> <span style="color:#993300; font-weight:bold;">WITHIN</span> <span style="color:#993300; font-weight:bold;">IF</span>
+        <span style="color:#009999; font-weight:bold;">DUP</span> <span style="color:#336699; font-weight:bold;">SCORE</span> <span style="color:#CC3300; font-weight:bold;">+!</span>
+        <span style="color:#336699; font-weight:bold;">CHECK-BONUS</span>
+    <span style="color:#993300; font-weight:bold;">ELSE</span>
+        <span style="color:#009999; font-weight:bold;">DROP</span>
+    <span style="color:#993300; font-weight:bold;">THEN</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">SKIP-NON-DIGIT</span> <span style="color:#669999; font-weight:bold;">(</span> <span style="color:#669999; font-weight:bold;">-- n )</span>
+    <span style="color:#993300; font-weight:bold;">BEGIN</span> <span style="color:#3D3D5C; font-weight:bold;">KEY</span> <span style="color:#3D3D5C; font-weight:bold;">DIGIT?</span> <span style="color:#CC6600; font-weight:bold;">0=</span> <span style="color:#993300; font-weight:bold;">WHILE</span> <span style="color:#993300; font-weight:bold;">REPEAT</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">GET-NUMBER</span> <span style="color:#669999; font-weight:bold;">(</span> <span style="color:#669999; font-weight:bold;">-- n )</span>
+    <span style="color:#800000; font-weight:bold;">0</span> <span style="color:#336699; font-weight:bold;">SKIP-NON-DIGIT</span>
+    <span style="color:#993300; font-weight:bold;">BEGIN</span>
+        <span style="color:#009999; font-weight:bold;">SWAP</span> <span style="color:#800000; font-weight:bold;">10</span> <span style="color:#CC6600; font-weight:bold;">*</span> <span style="color:#CC6600; font-weight:bold;">+</span>
+        <span style="color:#3D3D5C; font-weight:bold;">KEY</span> <span style="color:#3D3D5C; font-weight:bold;">DIGIT?</span>
+    <span style="color:#CC6600; font-weight:bold;">0=</span> <span style="color:#993300; font-weight:bold;">UNTIL</span> <span style="color:#993300; font-weight:bold;">;</span>
+
+<span style="color:#F07F00; font-weight:bold;">:</span> <span style="color:#336699; font-weight:bold;">BOWLING</span>
+    <span style="color:#336699; font-weight:bold;">GET-NUMBER</span> <span style="color:#800000; font-weight:bold;">0</span> <span style="color:#993300; font-weight:bold;">DO</span>
+        <span style="color:#336699; font-weight:bold;">START</span>
+        <span style="color:#336699; font-weight:bold;">GET-NUMBER</span> <span style="color:#800000; font-weight:bold;">0</span> <span style="color:#993300; font-weight:bold;">DO</span>
+            <span style="color:#336699; font-weight:bold;">GET-NUMBER</span> <span style="color:#336699; font-weight:bold;">ROLL+</span>
+        <span style="color:#993300; font-weight:bold;">LOOP</span>
+        <span style="color:#336699; font-weight:bold;">SCORE</span> <span style="color:#3D3D5C; font-weight:bold;">?</span> <span style="color:#3D3D5C; font-weight:bold;">CR</span>
+    <span style="color:#993300; font-weight:bold;">LOOP</span> <span style="color:#993300; font-weight:bold;">;</span>
+
 </pre>
