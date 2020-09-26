@@ -2,7 +2,7 @@
 
  4 CONSTANT EOF
  9 CONSTANT TAB
-10 CONSTANT NL
+10 CONSTANT NL%
 13 CONSTANT CR%
 1024 CONSTANT %TOKEN
 CREATE TOKEN %TOKEN ALLOT
@@ -71,7 +71,7 @@ DEFER _KEY
 \ true if char is a space char
 : IS-SPACE? ( c -- ? )
     DUP  BL  =
-    OVER NL  = OR
+    OVER NL%  = OR
     OVER CR% = OR
     SWAP TAB = OR ;
 
@@ -92,7 +92,7 @@ DEFER _KEY
 : SKIP-LINE.
     BEGIN
         _KEY DUP  EOF <>
-             OVER NL  <> AND
+             OVER NL%  <> AND
              OVER CR% <> AND WHILE
         EMIT-HTML
     REPEAT ?_EMIT ;
@@ -102,7 +102,7 @@ DEFER _KEY
 : SKIP-STRING.
     BEGIN
         _KEY DUP  EOF <>
-             OVER NL  <> AND
+             OVER NL% <> AND
              OVER CR% <> AND
              OVER [CHAR] " <> AND WHILE
         EMIT-HTML

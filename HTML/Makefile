@@ -3,3 +3,6 @@ unit: Tests.fs HTMLHighlight.fs
 
 sample: sample.fs
 	gforth-itc HTMLHighlight.fs <sample.fs
+
+install: HTMLHighlight.fs
+	cp HTMLHighlight.fs /usr/local/bin/.
