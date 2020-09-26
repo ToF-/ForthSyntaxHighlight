@@ -1,5 +1,7 @@
-\ this is a line comment
+\ this is a line comment <sample.dat
+VARIABLE FOO
 ." I am going to define a word" CR
 : STAR ( this is a comment ) 
     42 EMIT ;
-STAR BYE
+3 4 & <BUFFER>
+. STAR BYE

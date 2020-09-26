@@ -56,6 +56,15 @@ VARIABLE _#INPUT
 ' TYPE>! IS _TYPE
 ' KEY<@ IS _KEY
 
+T{ ." EMIT-HTML escapes < and > " CR
+    RESET-OUTPUT CHAR < EMIT-HTML S" &lt" ?OUTPUT
+    RESET-OUTPUT CHAR > EMIT-HTML S" &gt" ?OUTPUT
+}T
+T{ ." TYPE-HTML escapes < and > " CR
+    RESET-OUTPUT S" FOO<BAR" TYPE-HTML S" FOO&ltBAR" ?OUTPUT
+    RESET-OUTPUT S" FOO>BAR" TYPE-HTML S" FOO&gtBAR" ?OUTPUT
+}T
+
 T{ ." <SPAN>. outputs a span tag with a color and a font weight" CR
     RESET-OUTPUT 4807 FALSE <SPAN>.
     S\" <span style=\"color:#0012C7; font-weight:normal;\">" ?OUTPUT
@@ -242,8 +251,8 @@ T{ ." SOURCE. doesn't apply colors for a line comment" CR
     255   0 128 TRUE RGBW-VALUE $COMMENT  ATTRIBUTES !
     255   0 128 TRUE RGBW-VALUE $LCOMMENT ATTRIBUTES !
     RESET-OUTPUT
-    S\" SWAP \\ IF DROP THEN +" SET-INPUT
+    S\" SWAP \\ IF DROP THEN + <foo" SET-INPUT
     SOURCE.
-    S\" <pre style=\"color:#010203;background:#F0F0F0;\"><span style=\"color:#808000; font-weight:bold;\">SWAP</span> <span style=\"color:#FF0080; font-weight:bold;\">\\</span> <span style=\"color:#FF0080; font-weight:bold;\">IF DROP THEN +</span></pre>"
+    S\" <pre style=\"color:#010203;background:#F0F0F0;\"><span style=\"color:#808000; font-weight:bold;\">SWAP</span> <span style=\"color:#FF0080; font-weight:bold;\">\\</span> <span style=\"color:#FF0080; font-weight:bold;\">IF DROP THEN + &ltfoo</span></pre>"
     ?OUTPUT
 BYE

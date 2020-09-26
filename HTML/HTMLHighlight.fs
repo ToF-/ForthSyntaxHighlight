@@ -19,9 +19,24 @@ DEFER _KEY
 ' TYPE IS _TYPE
 ' KEY  IS _KEY
 
+\ emit a char to html, escaping < and >
+: EMIT-HTML ( c -- c )
+    DUP [CHAR] < = IF DROP S" &lt" _TYPE 
+    ELSE DUP [CHAR] > = IF DROP S" &gt" _TYPE
+    ELSE _EMIT THEN THEN ;
+
+\ type a string to html, escaping < and >
+: TYPE-HTML ( addr # -- )
+    ?DUP IF 
+        OVER + SWAP DO
+            I C@ EMIT-HTML 
+        LOOP
+    ELSE DROP
+    THEN ;
+
 \ emits a char if it's not EOF
 : _?EMIT ( c -- )
-    DUP EOF <> IF _EMIT ELSE DROP THEN ;
+    DUP EOF <> IF EMIT-HTML ELSE DROP THEN ;
 
 \ convert a number to 6 digit hex string
 : HEX6 ( n -- addr # )
@@ -79,7 +94,7 @@ DEFER _KEY
         _KEY DUP  EOF <>
              OVER NL  <> AND
              OVER CR% <> AND WHILE
-        _EMIT
+        EMIT-HTML
     REPEAT ?_EMIT ;
 
 \ read and print chars until " or eol or eof
@@ -90,7 +105,7 @@ DEFER _KEY
              OVER NL  <> AND
              OVER CR% <> AND
              OVER [CHAR] " <> AND WHILE
-        _EMIT
+        EMIT-HTML
     REPEAT ?_EMIT ;
 
 \ read and print chars until ) or eof
@@ -99,7 +114,7 @@ DEFER _KEY
     BEGIN
         _KEY DUP  EOF <>
              OVER [CHAR] ) <> AND WHILE
-        _EMIT
+        EMIT-HTML
     REPEAT ?_EMIT ;
 
 \ create a new, empty linked list
@@ -242,7 +257,7 @@ VARIABLE LCOMMENT
 
 \ display a span element with attributes
 : SPAN. ( addr # attr -- )
-    VALUE>RGBW <SPAN>. _TYPE </SPAN>. ;
+    VALUE>RGBW <SPAN>. TYPE-HTML </SPAN>. ;
 
 \ convert a char to uppercase
 : C>UPPER ( c -- c )
@@ -333,13 +348,16 @@ VARIABLE BACKGROUND
 [IFUNDEF] TESTING
 \ $NUMBER $STRING $COMMENT $LCOMMENT $USERDEF $DEFINING $OPERATOR $CONTROL $STACK $MEMORY $DEFAULT
 HEX 00 00 00 RGB COLOR !
-    FF FF FF RGB BACKGROUND !
-    80 00 00 FALSE RGBW-VALUE $NUMBER   ATTRIBUTES !
-    00 80 00 FALSE RGBW-VALUE $STRING   ATTRIBUTES !
-    66 00 CC FALSE RGBW-VALUE $COMMENT  ATTRIBUTES !
-    66 66 99 FALSE RGBW-VALUE $LCOMMENT  ATTRIBUTES !
-    33 66 99 TRUE  RGBW-VALUE $USERDEF  ATTRIBUTES !
-    F0 7F 00 TRUE  RGBW-VALUE $DEFINING ATTRIBUTES !
+    F2 F2 F2 RGB BACKGROUND !
+    80 00 00 TRUE RGBW-VALUE $NUMBER   ATTRIBUTES !
+    00 80 00 TRUE RGBW-VALUE $STRING   ATTRIBUTES !
+    66 99 99 TRUE RGBW-VALUE $COMMENT  ATTRIBUTES !
+    66 99 99 TRUE RGBW-VALUE $LCOMMENT ATTRIBUTES !
+    33 66 99 TRUE RGBW-VALUE $USERDEF  ATTRIBUTES !
+    F0 7F 00 TRUE RGBW-VALUE $DEFINING ATTRIBUTES !
+    CC 66 00 TRUE RGBW-VALUE $OPERATOR ATTRIBUTES !
+    99 33 00 TRUE RGBW-VALUE $CONTROL  ATTRIBUTES !
+    00 99 99 TRUE RGBW-VALUE $STACK    ATTRIBUTES !
 SOURCE.
 BYE
 [THEN]
