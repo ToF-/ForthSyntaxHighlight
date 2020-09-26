@@ -181,5 +181,31 @@ T{ ." After displaying a defining word, the next word is in user def attributes"
     RESET-OUTPUT
     S" STAR" TOKEN.
     S\" <span style=\"color:#010101; font-weight:normal;\">STAR</span>" ?OUTPUT
+}T
+T{ ." TOKEN. displays token in lowercase or uppercase" CR
+    42 17 23 TRUE RGBW-VALUE $STACK ATTRIBUTES !
+    RESET-OUTPUT
+    S" SwAp" TOKEN.
+    S\" <span style=\"color:#2A1117; font-weight:bold;\">SwAp</span>" ?OUTPUT
+}T
+T{ ." TOKEN<. get the next token on the input stream while printing spaces" CR
+    S"      SWAP " SET-INPUT
+    RESET-OUTPUT
+    TOKEN<. 
+    BL ?S 4 ?S
+    TOKEN 4 S" SWAP" STR= ?TRUE
+    S"      " ?OUTPUT
+}T
 
+ T{ ." SOURCE. display html source code with colors" CR
+      1   2   3 RGB COLOR !
+    240 240 240 RGB BACKGROUND !
+    128 128 0   TRUE RGBW-VALUE $STACK ATTRIBUTES !
+    128   0 128 TRUE RGBW-VALUE $OPERATOR ATTRIBUTES !
+    128 128 128 TRUE RGBW-VALUE $CONTROL ATTRIBUTES !
+    RESET-OUTPUT
+    S" SWAP + IF DROP THEN" SET-INPUT
+    SOURCE.
+    S\" <pre style=\"color:#010203;background:#F0F0F0;\"><span style=\"color:#808000; font-weight:bold;\">SWAP</span> <span style=\"color:#800080; font-weight:bold;\">+</span> <span style=\"color:#808080; font-weight:bold;\">IF</span> <span style=\"color:#808000; font-weight:bold;\">DROP</span> <span style=\"color:#808080; font-weight:bold;\">THEN</span></pre>" ?OUTPUT 
+ }T
 BYE

@@ -4,16 +4,18 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-$COMMENT	HTMLHighlight.fs	/^2 CONSTANT $COMMENT$/;"	c
-$CONTROL	HTMLHighlight.fs	/^7 CONSTANT $CONTROL$/;"	c
-$DEFINING	HTMLHighlight.fs	/^5 CONSTANT $DEFINING$/;"	c
-$LCOMMENT	HTMLHighlight.fs	/^3 CONSTANT $LCOMMENT$/;"	c
-$MEMORY	HTMLHighlight.fs	/^9 CONSTANT $MEMORY$/;"	c
-$NUMBER	HTMLHighlight.fs	/^0 CONSTANT $NUMBER$/;"	c
-$OPERATOR	HTMLHighlight.fs	/^6 CONSTANT $OPERATOR$/;"	c
-$STACK	HTMLHighlight.fs	/^8 CONSTANT $STACK$/;"	c
-$STRING	HTMLHighlight.fs	/^1 CONSTANT $STRING$/;"	c
-$USERDEF	HTMLHighlight.fs	/^4 CONSTANT $USERDEF$/;"	c
+$COMMENT	HTMLHighlight.fs	/^ 2 CONSTANT $COMMENT$/;"	c
+$CONTROL	HTMLHighlight.fs	/^ 7 CONSTANT $CONTROL$/;"	c
+$DEFAULT	HTMLHighlight.fs	/^10 CONSTANT $DEFAULT$/;"	c
+$DEFINING	HTMLHighlight.fs	/^ 5 CONSTANT $DEFINING$/;"	c
+$LCOMMENT	HTMLHighlight.fs	/^ 3 CONSTANT $LCOMMENT$/;"	c
+$MEMORY	HTMLHighlight.fs	/^ 9 CONSTANT $MEMORY$/;"	c
+$NUMBER	HTMLHighlight.fs	/^ 0 CONSTANT $NUMBER$/;"	c
+$OPERATOR	HTMLHighlight.fs	/^ 6 CONSTANT $OPERATOR$/;"	c
+$STACK	HTMLHighlight.fs	/^ 8 CONSTANT $STACK$/;"	c
+$STRING	HTMLHighlight.fs	/^ 1 CONSTANT $STRING$/;"	c
+$USERDEF	HTMLHighlight.fs	/^ 4 CONSTANT $USERDEF$/;"	c
+(TOKEN.)	HTMLHighlight.fs	/^: (TOKEN.) ( addr # -- )$/;"	d
 ,T	HTMLHighlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	a
 ,T	HTMLHighlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	c
 ,T	HTMLHighlight.fs	/^,T :         ,T CREATE   ,T VARIABLE   ,T CONSTANT ,T 2VARIABLE ,T 2CONSTANT ,T DEFER$/;"	v
@@ -25,12 +27,16 @@ $USERDEF	HTMLHighlight.fs	/^4 CONSTANT $USERDEF$/;"	c
 </SPAN>.	HTMLHighlight.fs	/^: <\/SPAN>.$/;"	d
 <PRE>.	HTMLHighlight.fs	/^: <PRE>. ( col col -- )$/;"	d
 <SPAN>.	HTMLHighlight.fs	/^: <SPAN>. ( rgb bold? -- )$/;"	d
+>UPPER	HTMLHighlight.fs	/^: >UPPER ( addr # -- addr # )$/;"	d
 ?OUTPUT	Tests.fs	/^: ?OUTPUT ( addr # -- ? )$/;"	d
 ?_EMIT	HTMLHighlight.fs	/^: ?_EMIT ( c -- )$/;"	d
+ADD-TOKEN	HTMLHighlight.fs	/^: ADD-TOKEN ( addr # -- )$/;"	d
 ATTRIBUTES	HTMLHighlight.fs	/^CREATE ATTRIBUTES 10 CELLS ALLOT$/;"	a
+C>UPPER	HTMLHighlight.fs	/^: C>UPPER ( c -- c )$/;"	d
 CATEGORY	HTMLHighlight.fs	/^VARIABLE CATEGORY$/;"	v
 CHAIN-LINK	HTMLHighlight.fs	/^: CHAIN-LINK ( list -- )$/;"	d
 CR%	HTMLHighlight.fs	/^13 CONSTANT CR%$/;"	c
+DEFINING	HTMLHighlight.fs	/^VARIABLE DEFINING$/;"	v
 EMIT>!	Tests.fs	/^: EMIT>! ( c -- )$/;"	d
 EOF	HTMLHighlight.fs	/^ 4 CONSTANT EOF$/;"	c
 FIND-ITEM	HTMLHighlight.fs	/^: FIND-ITEM ( list addr # -- link|0 )$/;"	d
@@ -52,6 +58,7 @@ SKIP-COMMENT.	HTMLHighlight.fs	/^: SKIP-COMMENT.$/;"	d
 SKIP-LINE.	HTMLHighlight.fs	/^: SKIP-LINE.$/;"	d
 SKIP-SPACE.	HTMLHighlight.fs	/^: SKIP-SPACE. ( -- c )$/;"	d
 SKIP-STRING.	HTMLHighlight.fs	/^: SKIP-STRING.$/;"	d
+SPAN.	HTMLHighlight.fs	/^: SPAN. ( addr # attr -- )$/;"	d
 STAR	sample.fs	/^: STAR $/;"	d
 TAB	HTMLHighlight.fs	/^ 9 CONSTANT TAB$/;"	c
 TESTING	Tests.fs	/^TRUE CONSTANT TESTING$/;"	c
